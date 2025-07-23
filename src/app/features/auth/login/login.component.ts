@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { AuthApiService } from './auth-api.service';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
 
 @Component({
   selector: 'app-login.component',
-  imports: [ReactiveFormsModule, ButtonModule],
+  imports: [ReactiveFormsModule, ButtonModule, CardModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
