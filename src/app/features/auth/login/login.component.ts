@@ -3,10 +3,11 @@ import { AuthApiService } from './auth-api.service';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
+import { DrawerComponent } from '../../../shared/drawer/drawer.component';
 
 @Component({
   selector: 'app-login.component',
-  imports: [ReactiveFormsModule, ButtonModule, CardModule],
+  imports: [ReactiveFormsModule, ButtonModule, CardModule, DrawerComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
