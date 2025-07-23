@@ -1,1 +1,7 @@
-<p>login.component works!</p>
+
+
+
+<input type="text" [formControl]="username" placeholder="Ingresa tu correo"/>
+<input type="password" [formControl]="password" placeholder="Ingresa tu contraseña"/>
+
+<button (click)="onSubmit()" > Enviar</button>
