@@ -5,6 +5,7 @@ import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
 import SurfacePreset from './presets/surface';
+import Aura from '@primeuix/themes/aura';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -12,9 +13,9 @@ export const appConfig: ApplicationConfig = {
     providePrimeNG({
       theme: {
         preset: SurfacePreset,
-        options: {
+        /* options: {
           darkModeSelector: '.my-app-dark'
-        }
+        } */
       }
     }),
     provideBrowserGlobalErrorListeners(),
