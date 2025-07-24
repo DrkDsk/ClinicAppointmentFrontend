@@ -1,15 +1,30 @@
-<!-- <input type="text" [formControl]="username" placeholder="Ingresa tu correo"/>
-<input type="password" class="p-8!" [formControl]="password" placeholder="Ingresa tu contraseña"/>
+<div class="h-screen w-1/2 mx-auto">
+  <p-card class="flex flex-col justify-between">
 
-
-<p-button label="Check" (onClick)="onSubmit()"/>
-
-<h1 class="text-3xl font-bold underline">
-  Hello world!
-</h1> -->
-
-<p-card>
-    <p class="m-0">
-        Lorem ipsum dolor sit amet...
+    <p class="mt-6 mb-8 text-5xl">
+      Iniciar sesión
     </p>
-</p-card>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <p-inputgroup>
+        <p-inputgroup-addon>
+          <i class="pi pi-user"></i>
+        </p-inputgroup-addon>
+        <input pInputText formControlName="username" placeholder="correo electrónico" />
+      </p-inputgroup>
+
+      <div class="my-6"></div>
+
+      <p-inputgroup>
+        <p-inputgroup-addon>
+          <i class="pi pi-lock"></i>
+        </p-inputgroup-addon>
+        <p-password formControlName="password" [feedback]="false" placeholder="contraseña" />
+      </p-inputgroup>
+
+      <div class="flex flex-row justify-end mt-8">
+        <p-button label="Enviar" type="ngSubmit" [disabled]="!loginForm.valid" />
+      </div>
+    </form>
+  </p-card>
+</div>
