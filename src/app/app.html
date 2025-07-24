@@ -2,6 +2,6 @@
 
 <div class="transition-all duration-300" [ngClass]="{ 'ml-[250px]': drawerVisible, 'ml-0': !drawerVisible }">
   <div class="px-4">
-    <router-outlet></router-outlet>
+    <router-outlet (activate)='onAttach($event)'></router-outlet>
   </div>
 </div>

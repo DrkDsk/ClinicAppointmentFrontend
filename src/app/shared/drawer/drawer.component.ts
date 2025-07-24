@@ -3,10 +3,11 @@ import { DrawerModule } from 'primeng/drawer';
 import { ButtonModule } from 'primeng/button';
 import { AvatarModule } from 'primeng/avatar';
 import { NgClass } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-drawer-component',
-  imports: [DrawerModule, ButtonModule, AvatarModule, NgClass],
+  imports: [DrawerModule, ButtonModule, AvatarModule, NgClass, RouterLink],
   standalone: true,
   templateUrl: './drawer.component.html',
   styleUrl: './drawer.component.css'

@@ -16,4 +16,8 @@ export class App {
   openDrawer() {
     this.drawerVisible = true;
   }
+
+  onAttach(e: any) {
+    this.drawerVisible = false;
+  }
 }

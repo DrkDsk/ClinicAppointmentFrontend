@@ -1,14 +1,30 @@
 import { Component } from '@angular/core';
 import { AuthApiService } from './auth-api.service';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
-import { DrawerComponent } from '../../../shared/drawer/drawer.component';
-import { NgClass } from '@angular/common';
+import { InputGroupModule } from 'primeng/inputgroup';
+import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
+import { InputTextModule } from 'primeng/inputtext';
+import { SelectModule } from 'primeng/select';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { PasswordModule } from 'primeng/password';
 
 @Component({
   selector: 'app-login.component',
-  imports: [ReactiveFormsModule, ButtonModule, CardModule, DrawerComponent, NgClass],
+  standalone: true,
+  imports: [
+    ReactiveFormsModule,
+    ButtonModule,
+    PasswordModule,
+    CardModule,
+    FormsModule,
+    FormsModule,
+    InputGroupModule,
+    InputGroupAddonModule,
+    InputTextModule,
+    SelectModule,
+    InputNumberModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -16,22 +32,31 @@ import { NgClass } from '@angular/common';
 export class LoginComponent {
   drawerVisible = false;
 
-  username = new FormControl<string>('', {
-    nonNullable: true,
-    validators: [Validators.required]
+  loginForm = new FormGroup({
+    username: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.email]
+    }),
+
+    password: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.minLength(6)]
+    })
   });
 
-  password = new FormControl<string>('', {
-    nonNullable: true,
-    validators: [Validators.required, Validators.minLength(6)]
-  });
+  constructor(private apiService: AuthApiService) { }
 
-  constructor(private apiService: AuthApiService) {
+  get username() {
+    return this.loginForm.get('username')?.value ?? ""
+  }
 
+  get password() {
+    return this.loginForm.get('password')?.value ?? ""
   }
 
   onSubmit() {
-    const credentials = { username: this.username.value, password: this.password.value }
+    const credentials = { username: this.username, password: this.password }
+
     this.apiService.login(credentials.username, credentials.password)
   }
 
