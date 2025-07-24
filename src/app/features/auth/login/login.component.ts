@@ -4,15 +4,17 @@ import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { DrawerComponent } from '../../../shared/drawer/drawer.component';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-login.component',
-  imports: [ReactiveFormsModule, ButtonModule, CardModule, DrawerComponent],
+  imports: [ReactiveFormsModule, ButtonModule, CardModule, DrawerComponent, NgClass],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 
 export class LoginComponent {
+  drawerVisible = false;
 
   username = new FormControl<string>('', {
     nonNullable: true,
