@@ -9,13 +9,11 @@ import { Token } from './interfaces/token';
 })
 export class AuthApiService {
 
-  constructor(private httpClient: HttpClient) {
-
-  }
+  constructor(private httpClient: HttpClient) { }
 
   login(credentials: LoginCredentials): Observable<Token> {
     credentials.device = "samsung"
-    return this.httpClient.post<Token>('http://127.0.0.1:8000/api/auth/login', credentials)
+    return this.httpClient.post<Token>('api/auth/login', credentials)
   }
 
 }
