@@ -9,6 +9,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { PasswordModule } from 'primeng/password';
+import { LoginCredentials } from './interfaces/credential';
+import { NavigationFacade } from '../../../shared/facade/navigation.facade';
 
 @Component({
   selector: 'app-login.component',
@@ -44,7 +46,7 @@ export class LoginComponent {
     })
   });
 
-  constructor(private apiService: AuthApiService) { }
+  constructor(private apiService: AuthApiService, private navigationFacade: NavigationFacade) { }
 
   get username() {
     return this.loginForm.get('username')?.value ?? ""
@@ -55,9 +57,13 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    const credentials = { username: this.username, password: this.password }
+    const credentials: LoginCredentials = { email: this.username, password: this.password }
 
-    this.apiService.login(credentials.username, credentials.password)
+    const request = this.apiService.login(credentials)
+
+    request.subscribe({
+      next: (_) => this.navigationFacade.navigate("dashboard"),
+      error: (error) => console.error(error)
+    });
   }
-
 }

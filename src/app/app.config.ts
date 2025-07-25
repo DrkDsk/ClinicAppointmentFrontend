@@ -5,17 +5,16 @@ import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
 import SurfacePreset from './presets/surface';
-/* import Aura from '@primeuix/themes/aura'; */
+import { withInterceptors, provideHttpClient } from '@angular/common/http';
+import { baseUrlInterceptor } from './shared/interceptor/base_url.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideHttpClient(withInterceptors([baseUrlInterceptor])),
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {
-        preset: SurfacePreset,
-        /* options: {
-          darkModeSelector: '.my-app-dark'
-        } */
+        preset: SurfacePreset
       }
     }),
     provideBrowserGlobalErrorListeners(),
