@@ -12,9 +12,10 @@ import { LoginApiServiceImpl } from '../data/services/login_api.service.impl';
 import { TokenService } from '../../../../core/shared/data/services/token/token.service';
 import { NavigationFacade } from '../../../../core/facade/navigation.facade';
 import { LoginCredentials } from '../domain/entities/credential';
-import { LOGIN_API_SERVICE, LOGIN_REPOSITORY } from '../data/services/login.injection.token';
 import { LoginRepositoryImpl } from '../data/repositories/login.repository.impl';
 import { LoginRepository } from '../domain/repositories/login.repository';
+import { LOGIN_API_SERVICE } from '../data/services/login_api.service.injection.token';
+import { LOGIN_REPOSITORY } from '../domain/repositories/login.repository.injection.token';
 
 @Component({
   selector: 'app-login.component',
