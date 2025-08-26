@@ -6,8 +6,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { providePrimeNG } from 'primeng/config';
 import SurfacePreset from './presets/surface';
 import { withInterceptors, provideHttpClient } from '@angular/common/http';
-import { baseUrlInterceptor } from './shared/interceptor/base_url.interceptor';
-import { tokenInterceptor } from './core/token/token.interceptor';
+import { baseUrlInterceptor } from './core/interceptors/base_url.interceptor';
+import { tokenInterceptor } from './core/interceptors/token.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
