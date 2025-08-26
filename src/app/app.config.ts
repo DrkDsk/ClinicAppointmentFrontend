@@ -7,10 +7,11 @@ import { providePrimeNG } from 'primeng/config';
 import SurfacePreset from './presets/surface';
 import { withInterceptors, provideHttpClient } from '@angular/common/http';
 import { baseUrlInterceptor } from './shared/interceptor/base_url.interceptor';
+import { tokenInterceptor } from './core/token/token.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideHttpClient(withInterceptors([baseUrlInterceptor])),
+    provideHttpClient(withInterceptors([baseUrlInterceptor, tokenInterceptor])),
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {

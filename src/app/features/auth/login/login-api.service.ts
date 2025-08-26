@@ -7,7 +7,7 @@ import { Token } from './interfaces/token';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthApiService {
+export class LoginApiService {
 
   constructor(private httpClient: HttpClient) { }
 

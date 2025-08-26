@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthApiService } from './auth-api.service';
+import { LoginApiService } from './login-api.service';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
@@ -11,6 +11,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { PasswordModule } from 'primeng/password';
 import { LoginCredentials } from './interfaces/credential';
 import { NavigationFacade } from '../../../shared/facade/navigation.facade';
+import { TokenService } from '../../../core/token/token.service';
 
 @Component({
   selector: 'app-login.component',
@@ -46,7 +47,7 @@ export class LoginComponent {
     })
   });
 
-  constructor(private apiService: AuthApiService, private navigationFacade: NavigationFacade) { }
+  constructor(private loginApiService: LoginApiService, private tokenService: TokenService, private navigationFacade: NavigationFacade) { }
 
   get username() {
     return this.loginForm.get('username')?.value ?? ""
@@ -59,10 +60,13 @@ export class LoginComponent {
   onSubmit() {
     const credentials: LoginCredentials = { email: this.username, password: this.password }
 
-    const request = this.apiService.login(credentials)
+    const request = this.loginApiService.login(credentials)
 
     request.subscribe({
-      next: (_) => this.navigationFacade.navigate("dashboard"),
+      next: (response) => {
+        this.navigationFacade.navigate("dashboard")
+        this.tokenService.setToken(response.token)
+      },
       error: (error) => console.error(error)
     });
   }
