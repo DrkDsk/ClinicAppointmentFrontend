@@ -11,19 +11,18 @@
           <p class="text-white text-7xl font-medium">Iniciar Sesión</p>
         </div>
 
-        <div class="bg-surface-400 rounded-lg text-surface-600 border-1 border-white">
-          <input formControlName="password" class="w-full px-4 py-4" placeholder="Email">
-        </div>
+        <input formControlName="username"
+          class="bg-surface-400 w-full px-4 py-4 rounded-lg text-surface-600 focus:text-white" placeholder="Email">
 
         <div class="my-6"></div>
 
-        <div class="bg-surface-400 rounded-lg text-surface-600">
-          <input formControlName="password" class="w-full px-4 py-4" placeholder="Password">
-        </div>
+        <input formControlName="password"
+          class="bg-surface-400 w-full px-4 py-4 rounded-lg text-surface-600 focus:text-white" placeholder="Password">
 
         <div class="flex flex-row mt-8">
           <button class="text-white py-4 w-full rounded-3xl"
-            [ngClass]="loginForm.valid ? 'bg-primary' : 'bg-surface-300'" type="ngSubmit" [disabled]="!loginForm.valid">
+            [ngClass]="loginForm.valid ? 'bg-primary cursor-pointer' : 'bg-surface-300'" type="ngSubmit"
+            [disabled]="!loginForm.valid">
             Enviar
           </button>
         </div>
