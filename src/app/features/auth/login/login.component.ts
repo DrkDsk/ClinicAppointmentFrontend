@@ -10,8 +10,8 @@ import { SelectModule } from 'primeng/select';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { PasswordModule } from 'primeng/password';
 import { LoginCredentials } from './interfaces/credential';
-import { NavigationFacade } from '../../../shared/facade/navigation.facade';
-import { TokenService } from '../../../core/token/token.service';
+import { NavigationFacade } from '../../../core/shared/facade/navigation.facade';
+import { TokenService } from '../../../core/services/token/token.service';
 
 @Component({
   selector: 'app-login.component',

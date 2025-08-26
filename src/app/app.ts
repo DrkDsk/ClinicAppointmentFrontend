@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { DrawerComponent } from "./shared/drawer/drawer.component";
+import { DrawerComponent } from "./core/shared/drawer/drawer.component";
 import { NgClass } from '@angular/common';
 
 @Component({
