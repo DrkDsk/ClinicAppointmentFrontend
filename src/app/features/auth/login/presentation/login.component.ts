@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
@@ -8,10 +8,13 @@ import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { PasswordModule } from 'primeng/password';
-import { LoginApiService } from '../data/services/login-api.service';
+import { LoginApiServiceImpl } from '../data/services/login_api.service.impl';
 import { TokenService } from '../../../../core/shared/data/services/token/token.service';
 import { NavigationFacade } from '../../../../core/facade/navigation.facade';
-import { LoginCredentials } from '../domain/interfaces/credential';
+import { LoginCredentials } from '../domain/entities/credential';
+import { LOGIN_API_SERVICE, LOGIN_REPOSITORY } from '../data/services/login.injection.token';
+import { LoginRepositoryImpl } from '../data/repositories/login.repository.impl';
+import { LoginRepository } from '../domain/repositories/login.repository';
 
 @Component({
   selector: 'app-login.component',
@@ -28,6 +31,10 @@ import { LoginCredentials } from '../domain/interfaces/credential';
     InputTextModule,
     SelectModule,
     InputNumberModule],
+  providers: [
+    { provide: LOGIN_API_SERVICE, useClass: LoginApiServiceImpl },
+    { provide: LOGIN_REPOSITORY, useClass: LoginRepositoryImpl }
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -47,7 +54,7 @@ export class LoginComponent {
     })
   });
 
-  constructor(private loginApiService: LoginApiService, private tokenService: TokenService, private navigationFacade: NavigationFacade) { }
+  constructor(@Inject(LOGIN_REPOSITORY) private loginRepository: LoginRepository, private tokenService: TokenService, private navigationFacade: NavigationFacade) { }
 
   get username() {
     return this.loginForm.get('username')?.value ?? ""
@@ -60,12 +67,12 @@ export class LoginComponent {
   onSubmit() {
     const credentials: LoginCredentials = { email: this.username, password: this.password }
 
-    const request = this.loginApiService.login(credentials)
+    const request = this.loginRepository.login(credentials)
 
     request.subscribe({
-      next: (response) => {
+      next: (token) => {
         this.navigationFacade.navigate("dashboard")
-        this.tokenService.setToken(response.token)
+        this.tokenService.setToken(token);
       },
       error: (error) => console.error(error)
     });
