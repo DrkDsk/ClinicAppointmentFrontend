@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { LoginApiService } from './login-api.service';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
@@ -9,9 +8,10 @@ import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { PasswordModule } from 'primeng/password';
-import { LoginCredentials } from './interfaces/credential';
-import { NavigationFacade } from '../../../core/shared/facade/navigation.facade';
-import { TokenService } from '../../../core/services/token/token.service';
+import { LoginApiService } from '../data/services/login-api.service';
+import { TokenService } from '../../../../core/shared/data/services/token/token.service';
+import { NavigationFacade } from '../../../../core/facade/navigation.facade';
+import { LoginCredentials } from '../domain/interfaces/credential';
 
 @Component({
   selector: 'app-login.component',
