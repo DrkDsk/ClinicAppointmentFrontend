@@ -16,6 +16,7 @@ import { LoginRepositoryImpl } from '../data/repositories/login.repository.impl'
 import { LoginRepository } from '../domain/repositories/login.repository';
 import { LOGIN_API_SERVICE } from '../data/services/login_api.service.injection.token';
 import { LOGIN_REPOSITORY } from '../domain/repositories/login.repository.injection.token';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-login.component',
@@ -31,7 +32,9 @@ import { LOGIN_REPOSITORY } from '../domain/repositories/login.repository.inject
     InputGroupAddonModule,
     InputTextModule,
     SelectModule,
-    InputNumberModule],
+    InputNumberModule,
+    NgClass
+  ],
   providers: [
     { provide: LOGIN_API_SERVICE, useClass: LoginApiServiceImpl },
     { provide: LOGIN_REPOSITORY, useClass: LoginRepositoryImpl }
@@ -42,6 +45,7 @@ import { LOGIN_REPOSITORY } from '../domain/repositories/login.repository.inject
 
 export class LoginComponent {
   drawerVisible = false;
+  photo = "assets/images/bg1.jpg";
 
   loginForm = new FormGroup({
     username: new FormControl<string>('', {
