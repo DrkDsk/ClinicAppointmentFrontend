@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DashboardService } from './dashboard.service';
 
 @Component({
   selector: 'app-dashboard-component',
@@ -7,5 +8,21 @@ import { Component } from '@angular/core';
   styleUrl: './dashboard-component.css'
 })
 export class DashboardComponent {
+
+  constructor(private dashboardService: DashboardService) { }
+
+  testApi() {
+    const request = this.dashboardService.getUser();
+
+    request.subscribe({
+      next: (user) => {
+        console.log(user.data.id);
+      },
+      error: (error) => {
+
+      }
+    });
+  }
+
 
 }
