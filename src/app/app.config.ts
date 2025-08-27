@@ -12,7 +12,6 @@ import { tokenInterceptor } from './core/interceptors/token.interceptor';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(withInterceptors([baseUrlInterceptor, tokenInterceptor])),
-    provideAnimationsAsync(),
     providePrimeNG({
       theme: {
         preset: PurplePreset
