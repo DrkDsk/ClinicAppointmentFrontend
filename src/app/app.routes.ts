@@ -6,6 +6,10 @@ export const routes: Routes = [
         loadComponent: () => import('./core/shared/presentation/main/main.component').then(m => m.MainComponent),
         children: [
             {
+                path: '',
+                loadComponent: () => import('./features/home/presentation/home-component').then(m => m.HomeComponent)
+            },
+            {
                 path: 'dashboard',
                 loadComponent: () => import('./features/dashboard/presentation/dashboard-component').then(m => m.DashboardComponent)
             }
