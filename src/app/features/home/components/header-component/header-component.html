@@ -1,0 +1,61 @@
+<div [ngStyle]="{'background-image' : 'url(' + photoAsset + ')'}"
+    class="bg-cover bg-no-repeat h-screen bg-black/50 bg-blend-multiply">
+
+    <div class="flex flex-row w-full bg-white/60">
+        <div class="w-10/12  flex mx-auto my-6 items-center justify-around">
+            <div class="w-14 h-14">
+                <a class="cursor-pointer">
+                    <img :[src]="brandingAsset" class="object-cover" />
+                </a>
+            </div>
+
+            <div class="flex flex-row space-x-5 text-lg font-semibold text-black/60 mx-auto">
+                <a class="cursor-pointer hover:text-blue-200">
+                    Demos
+                </a>
+                <a class="cursor-pointer hover:text-blue-200">
+                    Quienes somos
+                </a>
+                <a class="cursor-pointer hover:text-blue-200">
+                    Contáctanos
+                </a>
+                <a class="cursor-pointer hover:text-blue-200">
+                    Especialidades
+                </a>
+                <a class="cursor-pointer hover:text-blue-200">
+                    Reserva una cita
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="absolute bottom-0 left-0 w-full h-[10vh] bg-gradient-to-b from-white/0 to-white">
+    </div>
+
+    <div class="flex h-full w-full justify-center">
+        <div class="flex flex-row w-5/6 pl-10 mt-20">
+            <div class="w-1/2">
+                <p class="text-white font-black text-7xl leading-normal">Tu salud dental es nuestra prioridad</p>
+                <p class="text-white font-black text-2xl leading-relaxed">Sonríe con confianza: cuidamos tu salud dental
+                    con tecnología moderna y atención personalizada.</p>
+            </div>
+            <div class="w-1/2 space-y-4 mx-8 mt-20">
+                <p class="text-white text-lg leading-normal"><span class="font-bold">Revisiones y limpiezas
+                        completas</span>: mantenemos
+                    tu
+                    sonrisa saludable con chequeos regulares.</p>
+                <p class="text-white text-lg leading-relaxed"><span class="font-bold">Ortodoncia y alineadores</span>:
+                    corrige tu sonrisa
+                    de manera cómoda y efectiva.</p>
+                <p class="text-white text-lg leading-normal"><span class="font-bold">Blanqueamiento dental
+                        profesional</span>: luce
+                    dientes
+                    más blancos de forma segura.</p>
+                <p class="text-white text-lg leading-relaxed"><span class="font-bold">Tratamientos de urgencia y cuidado
+                        integral</span>:
+                    atención rápida ante cualquier problema dental.</p>
+
+            </div>
+        </div>
+    </div>
+</div>
