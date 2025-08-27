@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { HeaderComponent } from "../components/header-component/header-component";
 import { SolutionsComponent } from "../components/solutions-component/solutions-component";
-import { CarouselComponent } from "../components/carousel-component/carousel-component";
+import { TeamComponent } from '../components/team-component/team-component';
+import { DoctorReviewsComponent } from "../components/doctor-reviews-component/doctor-reviews-component";
 
 @Component({
   selector: 'app-home-component',
-  imports: [HeaderComponent, SolutionsComponent, CarouselComponent],
+  imports: [HeaderComponent, SolutionsComponent, TeamComponent, DoctorReviewsComponent],
   templateUrl: './home-component.html',
   styleUrl: './home-component.css'
 })
