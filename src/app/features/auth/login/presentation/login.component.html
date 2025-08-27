@@ -1,14 +1,14 @@
 <div class="w-full flex h-screen dark:bg-primary-600 bg-surface-400">
   <div
-    class="h-10/12 w-2/3 flex flex-row my-auto mx-auto shadow-xl shadow-primary-800 rounded-2xl dark:bg-surface-200 bg-surface-600">
+    class="h-10/12 lg:w-2/3 w-11/12 mx-4 flex flex-row my-auto md:mx-auto shadow-xl shadow-primary-800 rounded-2xl dark:bg-surface-200 bg-surface-600">
 
-    <img [src]="photo" class="object-cover w-1/2 h-full rounded-tl-2xl rounded-bl-2xl" />
+    <img [src]="photo" class="object-cover w-0 md:w-1/2 h-full rounded-tl-2xl rounded-bl-2xl" />
 
-    <div class="w-1/2 px-4 my-24">
+    <div class="w-full lg:w-1/2 px-4 my-24 mx-auto">
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
         <div class="flex flex-row justify-center my-12">
-          <p class="text-white text-7xl font-medium">Iniciar Sesión</p>
+          <p class="text-white text-center text-4xl md:text-5xl lg:text-6xl font-medium">Iniciar Sesión</p>
         </div>
 
         <input formControlName="username"
