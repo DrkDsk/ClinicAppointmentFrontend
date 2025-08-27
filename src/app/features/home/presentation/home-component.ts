@@ -4,10 +4,11 @@ import { SolutionsComponent } from "../components/solutions-component/solutions-
 import { TeamComponent } from '../components/team-component/team-component';
 import { DoctorReviewsComponent } from "../components/doctor-reviews-component/doctor-reviews-component";
 import { TreatmentsComponent } from "../components/treatments-component/treatments-component";
+import { FooterComponent } from "../components/footer-component/footer-component";
 
 @Component({
   selector: 'app-home-component',
-  imports: [HeaderComponent, SolutionsComponent, TeamComponent, DoctorReviewsComponent, TreatmentsComponent],
+  imports: [HeaderComponent, SolutionsComponent, TeamComponent, DoctorReviewsComponent, TreatmentsComponent, FooterComponent],
   templateUrl: './home-component.html',
   styleUrl: './home-component.css'
 })
