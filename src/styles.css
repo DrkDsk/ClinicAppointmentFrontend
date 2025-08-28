@@ -2,73 +2,73 @@
 @plugin "tailwindcss-primeui";
 
 @font-face {
-    font-family: 'Raleway';
-    src: url('../public/assets/fonts/Raleway-Black.ttf');
+    font-family: 'Urbanist';
+    src: url('../public/assets/fonts/urbanist/Urbanist-Black.ttf');
     font-weight: bolder;
     font-style: normal
 }
 
 @font-face {
-    font-family: 'Raleway';
-    src: url('../public/assets/fonts/Raleway-ExtraBold.ttf');
+    font-family: 'Urbanist';
+    src: url('../public/assets/fonts/urbanist/Urbanist-ExtraBold.ttf');
     font-weight: 900;
     font-style: normal
 }
 
 @font-face {
-    font-family: 'Raleway';
-    src: url('../public/assets/fonts/Raleway-Bold.ttf');
+    font-family: 'Urbanist';
+    src: url('../public/assets/fonts/urbanist/Urbanist-Bold.ttf');
     font-weight: 800;
     font-style: normal
 }
 
 @font-face {
-    font-family: 'Raleway';
-    src: url('../public/assets/fonts/Raleway-SemiBold.ttf');
+    font-family: 'Urbanist';
+    src: url('../public/assets/fonts/urbanist/Urbanist-SemiBold.ttf');
     font-weight: 700;
     font-style: normal
 }
 
 @font-face {
-    font-family: 'Raleway';
-    src: url('../public/assets/fonts/Raleway-Medium.ttf');
+    font-family: 'Urbanist';
+    src: url('../public/assets/fonts/urbanist/Urbanist-Medium.ttf');
     font-weight: 600;
     font-style: normal
 }
 
 @font-face {
-    font-family: 'Raleway';
-    src: url('../public/assets/fonts/Raleway-Regular.ttf');
+    font-family: 'Urbanist';
+    src: url('../public/assets/fonts/urbanist/Urbanist-Regular.ttf');
     font-weight: 500;
     font-style: normal
 }
 
 @font-face {
-    font-family: 'Raleway';
-    src: url('../public/assets/fonts/Raleway-Light.ttf');
+    font-family: 'Urbanist';
+    src: url('../public/assets/fonts/urbanist/Urbanist-Light.ttf');
     font-weight: 400;
     font-style: normal
 }
 
 @font-face {
-    font-family: 'Raleway';
-    src: url('../public/assets/fonts/Raleway-ExtraLight.ttf');
+    font-family: 'Urbanist';
+    src: url('../public/assets/fonts/urbanist/Urbanist-ExtraLight.ttf');
     font-weight: 400;
     font-style: normal
 }
 
 @font-face {
-    font-family: 'Raleway';
-    src: url('../public/assets/fonts/Raleway-Thin.ttf');
+    font-family: 'Urbanist';
+    src: url('../public/assets/fonts/urbanist/Urbanist-Thin.ttf');
     font-weight: 300;
     font-style: normal
 }
 
 html,
 body {
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Urbanist', sans-serif;
 }
 
 * {
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Urbanist', sans-serif;
 }
