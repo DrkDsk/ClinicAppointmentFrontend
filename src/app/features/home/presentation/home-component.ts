@@ -14,14 +14,4 @@ import { FooterComponent } from "../components/footer-component/footer-component
 })
 export class HomeComponent {
 
-  drawerVisible = false;
-
-  openDrawer() {
-    this.drawerVisible = true;
-  }
-
-  onAttach(e: any) {
-    this.drawerVisible = false;
-  }
-
 }

@@ -3,11 +3,11 @@ import { DrawerModule } from 'primeng/drawer';
 import { ButtonModule } from 'primeng/button';
 import { AvatarModule } from 'primeng/avatar';
 import { NgClass } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-drawer-component',
-  imports: [DrawerModule, ButtonModule, AvatarModule, NgClass, RouterLink],
+  imports: [DrawerModule, ButtonModule, AvatarModule, NgClass, RouterLink, RouterOutlet],
   standalone: true,
   templateUrl: './drawer.component.html',
   styleUrl: './drawer.component.css'
@@ -23,7 +23,11 @@ export class DrawerComponent {
   }
 
   open() {
-    this.visible = true;
+    this.visible = !this.visible;
     this.visibleChange.emit(this.visible);
+  }
+
+  onAttach(e: any) {
+    this.visible = false;
   }
 }

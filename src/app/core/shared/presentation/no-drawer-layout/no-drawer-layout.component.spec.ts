@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NoDrawerLayoutComponent } from './no-drawer-layout.component';
 
-import { MainComponent } from './main.component';
 
 describe('MainComponent', () => {
-  let component: MainComponent;
-  let fixture: ComponentFixture<MainComponent>;
+  let component: NoDrawerLayoutComponent;
+  let fixture: ComponentFixture<NoDrawerLayoutComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MainComponent]
+      imports: [NoDrawerLayoutComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
-    fixture = TestBed.createComponent(MainComponent);
+    fixture = TestBed.createComponent(NoDrawerLayoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
