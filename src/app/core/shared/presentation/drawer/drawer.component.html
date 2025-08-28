@@ -1,4 +1,4 @@
-<p-drawer #drawerRef (onHide)="close()" [(visible)]="visible" position="left" [style]="{ width: '250px' }">
+<p-drawer #drawerRef (onHide)="close()" [(visible)]="visible" position="left" [style]="{ width: '250px', }">
   <ng-template #headless>
     <div class="flex flex-col h-full">
       <div class="flex items-center justify-between px-6 pt-4 shrink-0">
@@ -86,10 +86,9 @@
   </ng-template>
 </p-drawer>
 
-<div class="transition-all duration-300" [ngClass]="{ 'ml-[250px]': visible, 'ml-0': !visible }">
-  <div class="p-4">
-    <button class="bg-primary text-white dark:text-black px-2.5 py-1 rounded-sm cursor-pointer" (click)="open()">
-      <i class="pi pi-bars"></i>
-    </button>
-  </div>
+<div class="transition-all duration-300 p-2" [ngClass]="{ 'ml-[250px]': visible, 'ml-0': !visible}">
+  <button class="bg-primary text-white dark:text-black px-2.5 py-1 rounded-sm cursor-pointer mb-2" (click)="open()">
+    <i class="pi pi-bars"></i>
+  </button>
+  <router-outlet (activate)='onAttach($event)'></router-outlet>
 </div>
