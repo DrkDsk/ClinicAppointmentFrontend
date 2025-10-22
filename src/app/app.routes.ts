@@ -26,7 +26,7 @@ export const routes: Routes = [
             children : [
               {
                 path: 'people',
-                loadComponent: () => import('./features/users/people-component/people-component').then(m => m.PeopleComponent)
+                loadComponent: () => import('./features/users/presentation/people-component/people-component').then(m => m.PeopleComponent)
               }
             ]
           }
