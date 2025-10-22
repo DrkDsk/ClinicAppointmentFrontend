@@ -8,12 +8,17 @@
     <p-table
       [value]="people"
       [paginator]="true"
-      [rows]="10"
+      [rows]="rows"
       [first]="first"
+      [totalRecords]="totalRecords"
+      [lazy]="true"
+      (onLazyLoad)="loadPeople($event)"
+      [rowsPerPageOptions]="[10, 25, 50]"
       [showCurrentPageReport]="true"
       [tableStyle]="{ 'min-width': '50rem' }"
-      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-      [rowsPerPageOptions]="[10, 25, 50]"
+      currentPageReportTemplate="Mostrando {first} hasta {last} de {totalRecords} registros"
+      showGridlines
+      stripedRows
     >
       <ng-template pTemplate="header">
         <tr>

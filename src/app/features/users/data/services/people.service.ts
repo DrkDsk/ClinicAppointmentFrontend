@@ -9,7 +9,7 @@ export class PeopleService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getAppointments(page: Number = 1) {
-    return this.httpClient.get<PeopleDataResponse>(`api/users/people/get?page=${page}`)
+  getAppointments(page = 1, perPage = 10) {
+    return this.httpClient.get<PeopleDataResponse>(`api/users/people/get?page=${page}&perPage=${perPage}`);
   }
 }
