@@ -8,6 +8,7 @@ import { withInterceptors, provideHttpClient } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { baseUrlInterceptor } from './core/interceptors/base_url.interceptor';
 import { tokenInterceptor } from './core/interceptors/token.interceptor';
+import Aura from '@primeuix/themes/aura';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,7 +16,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {
-        preset: PurplePreset
+        preset: Aura
       }
     }),
     provideBrowserGlobalErrorListeners(),

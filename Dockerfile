@@ -18,6 +18,3 @@ COPY . .
 
 # Expone el puerto por defecto del servidor de desarrollo Angular
 EXPOSE 4200
-
-# Comando por defecto
-CMD ["ng", "serve", "--host", "0.0.0.0"]

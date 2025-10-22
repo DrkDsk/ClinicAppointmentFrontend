@@ -11,17 +11,4 @@ export class DashboardComponent {
 
   constructor(private dashboardService: DashboardService) { }
 
-  testApi() {
-    const request = this.dashboardService.getUser();
-
-    request.subscribe({
-      next: (user) => {
-        console.log(user.data.id);
-      },
-      error: (error) => {
-
-      }
-    });
-  }
-
 }

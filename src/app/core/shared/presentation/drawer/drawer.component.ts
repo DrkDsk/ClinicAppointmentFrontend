@@ -28,6 +28,5 @@ export class DrawerComponent {
   }
 
   onAttach(e: any) {
-    this.visible = false;
   }
 }
