@@ -4,11 +4,14 @@ import {ButtonModule} from 'primeng/button';
 import {FormsModule} from '@angular/forms';
 import {PeopleService} from '../../data/services/people.service';
 import {Person} from '../../domain/appointments.data.response';
+import {FloatLabel} from 'primeng/floatlabel';
+import {InputText} from 'primeng/inputtext';
+import {debounceTime, distinctUntilChanged, Subject} from 'rxjs';
 
 @Component({
   selector: 'app-people-component',
   imports: [
-    TableModule, ButtonModule, FormsModule
+    TableModule, ButtonModule, FormsModule, FloatLabel, InputText
   ],
   templateUrl: './people-component.html',
   styleUrl: './people-component.css'
@@ -18,12 +21,29 @@ export class PeopleComponent implements OnInit {
   constructor(private peopleService: PeopleService) {}
 
   people: Person[] = [];
+  originalPeople : Person[] = [];
   first = 0;
   perPage = 10;
   totalRecords = 0;
+  peopleQuery = ""
+  enablePagination = true;
+  private searchSubject = new Subject<string>();
 
   ngOnInit(): void {
-    this.callToService()
+    this.searchSubject
+      .pipe(
+        debounceTime(600),
+        distinctUntilChanged()
+      )
+      .subscribe((valor) => {
+        this.callToSearchPeople(valor)
+      });
+
+    this.getPeoplePaginateService()
+  }
+
+  onQueryChange(value: string) {
+    this.searchSubject.next(value);
   }
 
   next() {
@@ -31,7 +51,24 @@ export class PeopleComponent implements OnInit {
     this.first = this.first + perPage;
     const page = this.first / perPage + 1;
 
-    this.callToService(page, perPage);
+    this.getPeoplePaginateService(page, perPage);
+  }
+
+  callToSearchPeople(query: string) {
+    if (!query.length) {
+      this.enablePagination = true;
+      this.getPeoplePaginateService()
+      return ;
+    }
+
+    if (this.originalPeople.length === 0) {
+      this.originalPeople = [...this.people];
+    }
+
+    this.peopleService.search(query).subscribe((response) => {
+      this.people = response.data
+      this.enablePagination = false
+    })
   }
 
   prev() {
@@ -39,14 +76,14 @@ export class PeopleComponent implements OnInit {
     this.first = this.first - perPage;
     const page = this.first / perPage + 1;
 
-    this.callToService(page, perPage);
+    this.getPeoplePaginateService(page, perPage);
   }
 
   reset() {
     this.first = 0;
     this.perPage = 10;
     this.totalRecords = 0;
-    this.callToService()
+    this.getPeoplePaginateService()
   }
 
   isLastPage(): boolean {
@@ -64,13 +101,13 @@ export class PeopleComponent implements OnInit {
     this.first = first
     const page = first / perPage + 1;
 
-    this.callToService(page, perPage);
+    this.getPeoplePaginateService(page, perPage);
   }
 
-  callToService(page?: number, perPage?: number) {
+  getPeoplePaginateService(page?: number, perPage?: number) {
     this.peopleService.getAppointments(page, perPage).subscribe((response) => {
       this.people = response.data;
-      this.totalRecords = response.meta.total;
+      this.totalRecords = response.meta?.total ?? 0;
     });
   }
 }
