@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {TableModule} from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
-import {Person} from '../../dashboard/domain/entities/person';
 import {FormsModule} from '@angular/forms';
+import {PeopleService} from '../../data/services/people.service';
+import {Person} from '../../domain/appointments.data.response';
 
 @Component({
   selector: 'app-people-component',
@@ -13,22 +14,18 @@ import {FormsModule} from '@angular/forms';
   styleUrl: './people-component.css'
 })
 export class PeopleComponent implements OnInit {
-  customers!: Person[];
 
-  ngOnInit(): void {
-      this.customers = [
-        {
-          name : "Alfredo",
-          email: "joseaph.1998@gmail.com",
-          birthday: "2025-10-12",
-          phone: "9611427582",
-          id: "1"
-        }
-      ]
-  }
+  constructor(private peopleService: PeopleService) {}
 
+  people: Person[] = [];
   first = 0;
   rows = 11;
+
+  ngOnInit(): void {
+    this.peopleService.getAppointments().subscribe(appointments => {
+      this.people = appointments.data
+    })
+  }
 
   next() {
     this.first = this.first + this.rows;
@@ -43,11 +40,11 @@ export class PeopleComponent implements OnInit {
   }
 
   isLastPage(): boolean {
-    return this.customers ? this.first + this.rows >= this.customers.length : true;
+    return this.people ? this.first + this.rows >= this.people.length : true;
   }
 
   isFirstPage(): boolean {
-    return this.customers ? this.first === 0 : true;
+    return this.people ? this.first === 0 : true;
   }
 
 }
