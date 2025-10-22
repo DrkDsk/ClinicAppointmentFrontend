@@ -19,34 +19,38 @@ export class PeopleComponent implements OnInit {
 
   people: Person[] = [];
   first = 0;
-  rows = 10;
+  perPage = 10;
   totalRecords = 0;
 
   ngOnInit(): void {
-    this.peopleService.getAppointments().subscribe(response => {
-      this.totalRecords = response.meta.total
-      this.people = response.data
-    })
+    this.callToService()
   }
 
   next() {
-    this.first = this.first + this.rows;
-    const perPage = this.rows;
+    const perPage = this.perPage;
+    this.first = this.first + perPage;
     const page = this.first / perPage + 1;
 
     this.callToService(page, perPage);
   }
 
   prev() {
-    this.first = this.first - this.rows;
+    const perPage = this.perPage;
+    this.first = this.first - perPage;
+    const page = this.first / perPage + 1;
+
+    this.callToService(page, perPage);
   }
 
   reset() {
     this.first = 0;
+    this.perPage = 10;
+    this.totalRecords = 0;
+    this.callToService()
   }
 
   isLastPage(): boolean {
-    return this.people ? this.first + this.rows >= this.totalRecords : true;
+    return this.people ? this.first + this.perPage >= this.totalRecords : true;
   }
 
   isFirstPage(): boolean {
@@ -55,11 +59,10 @@ export class PeopleComponent implements OnInit {
 
   loadPeople(event: any) {
     const first = event.first;
-    const rows = event.rows;
-    this.rows = rows;
-    this.first = first
-    const page = first / rows + 1;
     const perPage = event.rows;
+    this.perPage = perPage;
+    this.first = first
+    const page = first / perPage + 1;
 
     this.callToService(page, perPage);
   }
