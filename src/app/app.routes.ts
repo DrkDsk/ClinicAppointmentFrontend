@@ -20,7 +20,16 @@ export const routes: Routes = [
             {
                 path: 'dashboard',
                 loadComponent: () => import('./features/dashboard/presentation/dashboard-component').then(m => m.DashboardComponent)
-            }
+            },
+          {
+            path: 'users',
+            children : [
+              {
+                path: 'people',
+                loadComponent: () => import('./features/users/people-component/people-component').then(m => m.PeopleComponent)
+              }
+            ]
+          }
         ]
     },
     {
