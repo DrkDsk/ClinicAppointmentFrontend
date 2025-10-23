@@ -1,4 +1,4 @@
-import {Person} from './person';
+import {Profile} from '../profile/domain/entities/profile';
 
 export interface Patient {
   id: number
@@ -6,5 +6,5 @@ export interface Patient {
   height?: string
   weight_measure_type?: string
   height_measure_type?: string
-  person: Person
+  person: Profile
 }

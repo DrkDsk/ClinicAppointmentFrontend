@@ -1,4 +1,4 @@
-export interface Person {
+export interface Profile {
   id: number
   name: string
   email: string

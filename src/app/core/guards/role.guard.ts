@@ -2,7 +2,7 @@ import {CanActivateChildFn, Router} from '@angular/router';
 import {inject} from '@angular/core';
 import {RoleService} from '../shared/data/services/role/role.service';
 
-export const roleGuard: CanActivateChildFn = () => {
+export const roleGuard: CanActivateChildFn = (_childRoute, _state) => {
 
   const router = inject(Router);
   const roleService = inject(RoleService)

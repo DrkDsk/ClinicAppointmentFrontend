@@ -1,7 +1,7 @@
-import {Person} from './person';
+import {Profile} from '../profile/domain/entities/profile';
 
 export interface Doctor {
   id: number
   specialty: string
-  person: Person
+  person: Profile
 }

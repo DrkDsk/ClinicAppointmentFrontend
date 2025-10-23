@@ -6,23 +6,23 @@ import {PeopleService} from '../../data/services/people.service';
 import {FloatLabel} from 'primeng/floatlabel';
 import {InputText} from 'primeng/inputtext';
 import {debounceTime, distinctUntilChanged, Subject} from 'rxjs';
-import {Person} from '../../domain/person';
+import {Profile} from '../domain/entities/profile';
 
 @Component({
   selector: 'app-people-component',
   imports: [
     TableModule, ButtonModule, FormsModule, FloatLabel, InputText
   ],
-  templateUrl: './people-component.html',
-  styleUrl: './people-component.css'
+  templateUrl: './profile.component.html',
+  styleUrl: './profile.component.css'
 })
-export class PeopleComponent implements OnInit {
+export class ProfileComponent implements OnInit {
 
   constructor(private peopleService: PeopleService) {
   }
 
-  people: Person[] = [];
-  originalPeople: Person[] = [];
+  people: Profile[] = [];
+  originalPeople: Profile[] = [];
   first = 0;
   perPage = 10;
   totalRecords = 0;

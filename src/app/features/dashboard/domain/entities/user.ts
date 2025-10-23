@@ -1,8 +1,8 @@
 import {Role} from "../../../../core/shared/domain/entities/roles"
-import {Person} from '../../../users/domain/person';
+import {Profile} from '../../../users/profile/domain/entities/profile';
 
 export interface User {
   id: string
-  person: Person,
+  person: Profile,
   roles: [Role]
 }

@@ -1,8 +1,9 @@
 import {Routes} from '@angular/router';
 import {NoDrawerLayoutComponent} from './core/shared/presentation/no-drawer-layout/no-drawer-layout.component';
 import {DrawerComponent} from './core/shared/presentation/drawer/drawer.component';
-import {authGuard} from './core/guards/auth-guard';
-import {roleGuard} from './core/guards/role-guard';
+import {authGuard} from './core/guards/auth.guard';
+import {roleGuard} from './core/guards/role.guard';
+import {noAuthGuard} from './core/guards/no.auth.guard';
 
 export const routes: Routes = [
   {
@@ -30,7 +31,7 @@ export const routes: Routes = [
         children: [
           {
             path: 'people',
-            loadComponent: () => import('./features/users/presentation/people-component/people-component').then(m => m.PeopleComponent)
+            loadComponent: () => import('./features/users/profile/presentation/profile.component').then(m => m.ProfileComponent)
           }
         ]
       }
@@ -38,6 +39,7 @@ export const routes: Routes = [
   },
   {
     path: 'login',
+    canActivate: [noAuthGuard],
     loadComponent: () => import('./features/auth/login/presentation/login.component').then(m => m.LoginComponent)
   }
 ];
