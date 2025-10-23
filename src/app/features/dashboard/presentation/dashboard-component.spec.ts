@@ -1,5 +1,5 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DashboardComponent } from './dashboard-component';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {DashboardComponent} from './dashboard-component';
 
 
 describe('DashboardComponent', () => {
@@ -17,7 +17,7 @@ describe('DashboardComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create-button', () => {
     expect(component).toBeTruthy();
   });
 });

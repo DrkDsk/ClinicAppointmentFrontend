@@ -1,5 +1,5 @@
-import { TestBed } from '@angular/core/testing';
-import { App } from './app';
+import {TestBed} from '@angular/core/testing';
+import {App} from './app';
 
 describe('App', () => {
   beforeEach(async () => {
@@ -8,7 +8,7 @@ describe('App', () => {
     }).compileComponents();
   });
 
-  it('should create the app', () => {
+  it('should create-button the app', () => {
     const fixture = TestBed.createComponent(App);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();

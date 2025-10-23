@@ -18,6 +18,7 @@ import {AUTH_API_SERVICE} from '../data/services/auth_api.service.injection.toke
 import {AUTH_REPOSITORY} from '../domain/repositories/auth.repository.injection.token';
 import {NgClass} from '@angular/common';
 import {RoleService} from '../../../../core/shared/data/services/role/role.service';
+import {AppPaths} from '../../../../core/constants/path.constants';
 
 @Component({
   selector: 'app-login.component',
@@ -45,7 +46,6 @@ import {RoleService} from '../../../../core/shared/data/services/role/role.servi
 })
 
 export class LoginComponent {
-  drawerVisible = false;
   photo = "assets/images/bg1.jpg";
 
   loginForm = new FormGroup({
@@ -81,7 +81,7 @@ export class LoginComponent {
 
     request.subscribe({
       next: (response) => {
-        this.navigationFacade.navigate("dashboard")
+        this.navigationFacade.navigate(AppPaths.dashboard)
         this.tokenService.setToken(response.token);
         const roles = response.roles.map(role => role.name);
         this.roleService.setRoles(roles)

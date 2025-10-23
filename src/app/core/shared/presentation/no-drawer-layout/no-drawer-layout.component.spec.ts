@@ -1,5 +1,5 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NoDrawerLayoutComponent } from './no-drawer-layout.component';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {NoDrawerLayoutComponent} from './no-drawer-layout.component';
 
 
 describe('MainComponent', () => {
@@ -17,7 +17,7 @@ describe('MainComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create-button', () => {
     expect(component).toBeTruthy();
   });
 });

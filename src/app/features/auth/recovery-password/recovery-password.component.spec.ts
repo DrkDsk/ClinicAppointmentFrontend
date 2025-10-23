@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { RecoveryPasswordComponent } from './recovery-password.component';
+import {RecoveryPasswordComponent} from './recovery-password.component';
 
 describe('RecoveryPasswordComponent', () => {
   let component: RecoveryPasswordComponent;
@@ -10,14 +10,14 @@ describe('RecoveryPasswordComponent', () => {
     await TestBed.configureTestingModule({
       imports: [RecoveryPasswordComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(RecoveryPasswordComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create-button', () => {
     expect(component).toBeTruthy();
   });
 });

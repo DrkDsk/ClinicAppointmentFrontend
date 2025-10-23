@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TeamComponent } from './team-component';
+import {TeamComponent} from './team-component';
 
 describe('TeamComponent', () => {
   let component: TeamComponent;
@@ -17,7 +17,7 @@ describe('TeamComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create-button', () => {
     expect(component).toBeTruthy();
   });
 });

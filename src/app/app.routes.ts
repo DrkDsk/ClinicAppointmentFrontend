@@ -4,6 +4,7 @@ import {DrawerComponent} from './core/shared/presentation/drawer/drawer.componen
 import {authGuard} from './core/guards/auth.guard';
 import {roleGuard} from './core/guards/role.guard';
 import {noAuthGuard} from './core/guards/no.auth.guard';
+import {AppPaths} from './core/constants/path.constants';
 
 export const routes: Routes = [
   {
@@ -12,7 +13,9 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        loadComponent: () => import('./features/home/presentation/home-component').then(m => m.HomeComponent)
+        loadComponent: () =>
+          import('./features/home/presentation/home-component')
+            .then(m => m.HomeComponent)
       }
     ]
   },
@@ -23,23 +26,35 @@ export const routes: Routes = [
     canActivateChild: [roleGuard],
     children: [
       {
-        path: 'dashboard',
-        loadComponent: () => import('./features/dashboard/presentation/dashboard-component').then(m => m.DashboardComponent)
+        path: AppPaths.dashboard,
+        loadComponent: () =>
+          import('./features/dashboard/presentation/dashboard-component')
+            .then(m => m.DashboardComponent)
       },
       {
-        path: 'users',
+        path: AppPaths.users,
         children: [
           {
-            path: 'people',
-            loadComponent: () => import('./features/users/profile/presentation/profile.component').then(m => m.ProfileComponent)
+            path: AppPaths.profile,
+            loadComponent: () =>
+              import('./features/users/profile/presentation/profile.component')
+                .then(m => m.ProfileComponent),
+          },
+          {
+            path: AppPaths.createProfile,
+            loadComponent: () =>
+              import('./features/users/profile/presentation/create-profile.component/create-profile.component')
+                .then(m => m.CreateProfileComponent),
           }
         ]
       }
     ]
   },
   {
-    path: 'login',
+    path: AppPaths.login,
     canActivate: [noAuthGuard],
-    loadComponent: () => import('./features/auth/login/presentation/login.component').then(m => m.LoginComponent)
+    loadComponent: () =>
+      import('./features/auth/login/presentation/login.component')
+        .then(m => m.LoginComponent)
   }
 ];

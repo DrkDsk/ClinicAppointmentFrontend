@@ -7,18 +7,21 @@ import {FloatLabel} from 'primeng/floatlabel';
 import {InputText} from 'primeng/inputtext';
 import {debounceTime, distinctUntilChanged, Subject} from 'rxjs';
 import {Profile} from '../domain/entities/profile';
+import {CreateButton} from '../../../../core/shared/presentation/buttons/create-button/create-button';
+import {NavigationFacade} from '../../../../core/facade/navigation.facade';
+import {AppPaths} from '../../../../core/constants/path.constants';
 
 @Component({
   selector: 'app-people-component',
   imports: [
-    TableModule, ButtonModule, FormsModule, FloatLabel, InputText
+    TableModule, ButtonModule, FormsModule, FloatLabel, InputText, CreateButton
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private peopleService: PeopleService) {
+  constructor(private peopleService: PeopleService, private navigationFacade: NavigationFacade) {
   }
 
   people: Profile[] = [];
@@ -111,4 +114,8 @@ export class ProfileComponent implements OnInit {
       this.totalRecords = response.meta?.total ?? 0;
     });
   }
+
+  navigateToCreateProfile = () => {
+    this.navigationFacade.navigate(`${AppPaths.users}/${AppPaths.createProfile}`);
+  };
 }

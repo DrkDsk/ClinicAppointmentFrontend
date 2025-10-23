@@ -1,6 +1,7 @@
 import {CanActivateChildFn, Router} from '@angular/router';
 import {inject} from '@angular/core';
 import {RoleService} from '../shared/data/services/role/role.service';
+import {AppPaths} from '../constants/path.constants';
 
 export const roleGuard: CanActivateChildFn = (_childRoute, _state) => {
 
@@ -11,5 +12,5 @@ export const roleGuard: CanActivateChildFn = (_childRoute, _state) => {
 
   const available = userRoles.every((role) => expectedRoles.includes(role));
 
-  return available ? true : router.createUrlTree(['/login']);
+  return available ? true : router.createUrlTree([`/${AppPaths.login}`]);
 };

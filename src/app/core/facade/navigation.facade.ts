@@ -1,11 +1,13 @@
-import { Injectable } from "@angular/core";
-import { Router } from "@angular/router";
+import {Injectable} from "@angular/core";
+import {Router} from "@angular/router";
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class NavigationFacade {
-    constructor(private router: Router) { }
+  constructor(private router: Router) {
+  }
 
-    navigate(path: string) {
-        this.router.navigate([`/${path}`])
-    }
+  navigate(path: string) {
+    this.router.navigate([`/${path}`]).then(_r => {
+    })
+  }
 }

@@ -1,4 +1,4 @@
-import { definePreset } from '@primeuix/themes';
+import {definePreset} from '@primeuix/themes';
 import Nora from '@primeuix/themes/nora';
 
 export const CustomPreset = definePreset(Nora, {
@@ -29,7 +29,7 @@ export const CustomPreset = definePreset(Nora, {
           200: '#a0a6e3',
           300: '#7c84d9',
           400: '#636ccB',
-          500: '#6E8CFB', // más brillante en dark mode
+          500: '#6E8CFB',
           600: '#50589C',
           700: '#3C467B',
           800: '#2f3563',

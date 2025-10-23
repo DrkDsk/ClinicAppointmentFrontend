@@ -5,6 +5,7 @@ import {AvatarModule} from 'primeng/avatar';
 import {NgClass} from '@angular/common';
 import {RouterLink, RouterOutlet} from '@angular/router';
 import {Ripple} from 'primeng/ripple';
+import {AppPaths} from '../../../constants/path.constants';
 
 @Component({
   selector: 'app-drawer-component',
@@ -30,4 +31,6 @@ export class DrawerComponent {
 
   onAttach(e: any) {
   }
+
+  protected readonly AppPaths = AppPaths;
 }
