@@ -1,22 +1,23 @@
-import { Component, Inject } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ButtonModule } from 'primeng/button';
-import { CardModule } from 'primeng/card';
-import { InputGroupModule } from 'primeng/inputgroup';
-import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
-import { InputTextModule } from 'primeng/inputtext';
-import { SelectModule } from 'primeng/select';
-import { InputNumberModule } from 'primeng/inputnumber';
-import { PasswordModule } from 'primeng/password';
-import { LoginApiServiceImpl } from '../data/services/login_api.service.impl';
-import { TokenService } from '../../../../core/shared/data/services/token/token.service';
-import { NavigationFacade } from '../../../../core/facade/navigation.facade';
-import { LoginCredentials } from '../domain/entities/credential';
-import { LoginRepositoryImpl } from '../data/repositories/login.repository.impl';
-import { LoginRepository } from '../domain/repositories/login.repository';
-import { LOGIN_API_SERVICE } from '../data/services/login_api.service.injection.token';
-import { LOGIN_REPOSITORY } from '../domain/repositories/login.repository.injection.token';
-import { NgClass } from '@angular/common';
+import {Component, Inject} from '@angular/core';
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {ButtonModule} from 'primeng/button';
+import {CardModule} from 'primeng/card';
+import {InputGroupModule} from 'primeng/inputgroup';
+import {InputGroupAddonModule} from 'primeng/inputgroupaddon';
+import {InputTextModule} from 'primeng/inputtext';
+import {SelectModule} from 'primeng/select';
+import {InputNumberModule} from 'primeng/inputnumber';
+import {PasswordModule} from 'primeng/password';
+import {AuthApiServiceImpl} from '../data/services/auth_api.service.impl';
+import {TokenService} from '../../../../core/shared/data/services/token/token.service';
+import {NavigationFacade} from '../../../../core/facade/navigation.facade';
+import {LoginCredentials} from '../domain/entities/credential';
+import {AuthRepositoryImpl} from '../data/repositories/auth.repository.impl';
+import {AuthRepository} from '../domain/repositories/auth.repository';
+import {AUTH_API_SERVICE} from '../data/services/auth_api.service.injection.token';
+import {AUTH_REPOSITORY} from '../domain/repositories/auth.repository.injection.token';
+import {NgClass} from '@angular/common';
+import {RoleService} from '../../../../core/shared/data/services/role/role.service';
 
 @Component({
   selector: 'app-login.component',
@@ -36,8 +37,8 @@ import { NgClass } from '@angular/common';
     NgClass
   ],
   providers: [
-    { provide: LOGIN_API_SERVICE, useClass: LoginApiServiceImpl },
-    { provide: LOGIN_REPOSITORY, useClass: LoginRepositoryImpl }
+    {provide: AUTH_API_SERVICE, useClass: AuthApiServiceImpl},
+    {provide: AUTH_REPOSITORY, useClass: AuthRepositoryImpl}
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
@@ -59,7 +60,11 @@ export class LoginComponent {
     })
   });
 
-  constructor(@Inject(LOGIN_REPOSITORY) private loginRepository: LoginRepository, private tokenService: TokenService, private navigationFacade: NavigationFacade) { }
+  constructor(@Inject(AUTH_REPOSITORY) private loginRepository: AuthRepository,
+              private tokenService: TokenService,
+              private roleService: RoleService,
+              private navigationFacade: NavigationFacade) {
+  }
 
   get username() {
     return this.loginForm.get('username')?.value ?? ""
@@ -70,14 +75,16 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    const credentials: LoginCredentials = { email: this.username, password: this.password }
+    const credentials: LoginCredentials = {email: this.username, password: this.password}
 
     const request = this.loginRepository.login(credentials)
 
     request.subscribe({
-      next: (token) => {
+      next: (response) => {
         this.navigationFacade.navigate("dashboard")
-        this.tokenService.setToken(token);
+        this.tokenService.setToken(response.token);
+        const roles = response.roles.map(role => role.name);
+        this.roleService.setRoles(roles)
       },
       error: (error) => console.error(error)
     });
