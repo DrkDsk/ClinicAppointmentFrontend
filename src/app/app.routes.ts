@@ -41,13 +41,14 @@ export const routes: Routes = [
                 .then(m => m.ProfileComponent),
           },
           {
-            path: AppPaths.createProfile,
+            path: AppPaths.createDoctor,
             loadComponent: () =>
-              import('./features/users/profile/presentation/create-profile.component/create-profile.component')
-                .then(m => m.CreateProfileComponent),
+              import('./features/users/doctor/presentation/create-doctor.component/create-doctor.component')
+                .then(m => m.CreateDoctorComponent),
           }
         ]
-      }
+      },
+
     ]
   },
   {
