@@ -3,12 +3,11 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { providePrimeNG } from 'primeng/config';
-import PurplePreset from './presets/purple';
 import { withInterceptors, provideHttpClient } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { baseUrlInterceptor } from './core/interceptors/base_url.interceptor';
 import { tokenInterceptor } from './core/interceptors/token.interceptor';
-import Aura from '@primeuix/themes/aura';
+import {CustomPreset} from './presets/presets';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,7 +15,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {
-        preset: Aura
+        preset: CustomPreset
       }
     }),
     provideBrowserGlobalErrorListeners(),
