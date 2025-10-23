@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CarouselModule } from 'primeng/carousel';
-import customResponsiveOptions from '../../../../core/constants/responsive_carousel_options';
+import customResponsiveOptions from '../../../../../core/constants/responsive_carousel_options';
 
 @Component({
   selector: 'app-team-component',
