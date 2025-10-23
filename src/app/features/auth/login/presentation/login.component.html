@@ -2,7 +2,7 @@
   <div
     class="h-10/12 lg:w-2/3 w-11/12 mx-4 flex flex-row my-auto md:mx-auto shadow-xl shadow-primary-800 rounded-2xl dark:bg-surface-200 bg-surface-600">
 
-    <img [src]="photo" class="object-cover w-0 md:w-1/2 h-full rounded-tl-2xl rounded-bl-2xl" />
+    <img [ngSrc]="photo" class="object-cover w-0 md:w-1/2 h-full rounded-tl-2xl rounded-bl-2xl" alt="" fill/>
 
     <div class="w-full lg:w-1/2 px-4 my-24 mx-auto">
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
@@ -12,19 +12,19 @@
         </div>
 
         <input formControlName="username"
-          class="bg-surface-300 dark:bg-surface-400 w-full px-4 py-4 rounded-lg text-surface-500 dark:text-surface-700 focus:text-white focus:outline-none focus:border focus:border-white"
-          placeholder="Email">
+               class="bg-surface-300 dark:bg-surface-400 w-full px-4 py-4 rounded-lg text-surface-500 dark:text-surface-700 focus:text-white focus:outline-none focus:border focus:border-white"
+               placeholder="Email">
 
         <div class="my-6"></div>
 
         <input formControlName="password"
-          class="bg-surface-300 dark:bg-surface-400 w-full px-4 py-4 rounded-lg text-surface-500 dark:text-surface-700 focus:outline-none focus:text-white focus:border focus:border-white"
-          placeholder="Password">
+               class="bg-surface-300 dark:bg-surface-400 w-full px-4 py-4 rounded-lg text-surface-500 dark:text-surface-700 focus:outline-none focus:text-white focus:border focus:border-white"
+               placeholder="Password">
 
         <div class="flex flex-row mt-8">
           <button class="text-white py-4 w-full rounded-3xl"
-            [ngClass]="loginForm.valid ? 'bg-primary cursor-pointer' : 'bg-surface-300'" type="ngSubmit"
-            [disabled]="!loginForm.valid">
+                  [ngClass]="loginForm.valid ? 'bg-primary cursor-pointer' : 'bg-surface-300'" type="ngSubmit"
+                  [disabled]="!loginForm.valid">
             Enviar
           </button>
         </div>
