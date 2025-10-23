@@ -1,3 +1,6 @@
+import {Role} from './AuthenticationResponseModel';
+
 export interface LoginResponseModel {
-    token: string
+  token: string,
+  roles: Role[]
 }
