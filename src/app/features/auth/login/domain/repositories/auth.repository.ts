@@ -4,6 +4,4 @@ import {LoginResponseModel} from '../../data/models/login.response.model';
 
 export interface AuthRepository {
   login(credentials: LoginCredentials): Observable<LoginResponseModel>;
-
-  isAuthenticated(): Observable<boolean>;
 }

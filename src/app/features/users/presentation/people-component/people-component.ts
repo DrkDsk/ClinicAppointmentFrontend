@@ -3,10 +3,10 @@ import {TableModule} from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
 import {FormsModule} from '@angular/forms';
 import {PeopleService} from '../../data/services/people.service';
-import {Person} from '../../domain/appointments.data.response';
 import {FloatLabel} from 'primeng/floatlabel';
 import {InputText} from 'primeng/inputtext';
 import {debounceTime, distinctUntilChanged, Subject} from 'rxjs';
+import {Person} from '../../domain/person';
 
 @Component({
   selector: 'app-people-component',
@@ -18,10 +18,11 @@ import {debounceTime, distinctUntilChanged, Subject} from 'rxjs';
 })
 export class PeopleComponent implements OnInit {
 
-  constructor(private peopleService: PeopleService) {}
+  constructor(private peopleService: PeopleService) {
+  }
 
   people: Person[] = [];
-  originalPeople : Person[] = [];
+  originalPeople: Person[] = [];
   first = 0;
   perPage = 10;
   totalRecords = 0;
@@ -58,7 +59,7 @@ export class PeopleComponent implements OnInit {
     if (!query.length) {
       this.enablePagination = true;
       this.getPeoplePaginateService()
-      return ;
+      return;
     }
 
     if (this.originalPeople.length === 0) {

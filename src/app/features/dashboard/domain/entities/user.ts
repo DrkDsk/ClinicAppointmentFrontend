@@ -1,8 +1,8 @@
-import { Role } from "./roles"
-import {Person} from '../../../users/domain/appointments.data.response';
+import {Role} from "../../../../core/shared/domain/entities/roles"
+import {Person} from '../../../users/domain/person';
 
 export interface User {
-    id: string
-    person: Person,
-    roles: [Role]
+  id: string
+  person: Person,
+  roles: [Role]
 }
