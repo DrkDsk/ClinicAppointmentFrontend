@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -6,7 +6,8 @@ import { Injectable } from '@angular/core';
 export class TokenService {
   private TOKEN_KEY = 'accessToken';
 
-  constructor() { }
+  constructor() {
+  }
 
   public setToken(token: string) {
     sessionStorage.setItem(this.TOKEN_KEY, token)
@@ -19,5 +20,4 @@ export class TokenService {
   public removeToken(): void {
     sessionStorage.removeItem(this.TOKEN_KEY);
   }
-
 }
