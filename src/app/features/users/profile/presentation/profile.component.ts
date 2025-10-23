@@ -116,6 +116,6 @@ export class ProfileComponent implements OnInit {
   }
 
   navigateToCreateProfile = () => {
-    this.navigationFacade.navigate(`${AppPaths.users}/${AppPaths.createProfile}`);
+    //this.navigationFacade.navigate(`${AppPaths.users}/${AppPaths.createProfile}`);
   };
 }
