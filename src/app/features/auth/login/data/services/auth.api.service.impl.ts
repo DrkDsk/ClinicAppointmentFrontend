@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {LoginCredentials} from '../../domain/entities/credential';
 import {LoginResponseModel} from '../models/login.response.model';
-import {AuthApiService} from './auth_api.service';
+import {AuthApiService} from './auth.api.service';
 
 @Injectable({
   providedIn: 'root'
