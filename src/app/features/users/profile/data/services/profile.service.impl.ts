@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {PeopleDataResponseModel} from '../models/people.data.response.model';
+import {ProfileService} from './profile.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PeopleService {
+export class ProfileServiceImpl implements ProfileService {
 
   constructor(private httpClient: HttpClient) {
   }
