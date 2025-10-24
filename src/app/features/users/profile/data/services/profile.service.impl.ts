@@ -11,7 +11,7 @@ export class ProfileServiceImpl implements ProfileService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getAppointments(page = 1, perPage = 10) {
+  getProfilePaginate(page = 1, perPage = 10) {
     return this.httpClient.get<PeopleDataResponseModel>(`api/people/get?page=${page}&perPage=${perPage}`);
   }
 

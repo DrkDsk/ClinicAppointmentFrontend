@@ -1,4 +1,4 @@
-import {Profile} from '../profile/domain/entities/profile';
+import {Profile} from '../../../profile/domain/entities/profile';
 
 export interface Patient {
   id: number

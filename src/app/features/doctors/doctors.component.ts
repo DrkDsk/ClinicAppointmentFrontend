@@ -3,7 +3,7 @@ import {CreateButton} from '../../core/shared/presentation/buttons/create-button
 import {NavigationFacade} from '../../core/facade/navigation.facade';
 import {AppPaths} from '../../core/constants/path.constants';
 import {Button} from 'primeng/button';
-import {Doctor} from '../users/domain/doctor';
+import {Doctor} from '../users/doctor/domain/entities/doctor';
 import {DoctorRepository} from '../users/doctor/domain/repositories/doctor.repository';
 import {DOCTOR_REPOSITORY} from '../users/doctor/domain/repositories/doctor.repository.injection.token';
 import {DoctorRepositoryImpl} from '../users/doctor/data/repositories/doctor.repository.impl';
@@ -13,6 +13,8 @@ import {InputText} from 'primeng/inputtext';
 import {debounceTime, distinctUntilChanged, Subject} from 'rxjs';
 import {PrimeTemplate} from 'primeng/api';
 import {TableModule} from 'primeng/table';
+import {DOCTOR_SERVICE_INJECTION_TOKEN} from '../users/doctor/data/services/doctor.service.injection.token';
+import {DoctorServiceImpl} from '../users/doctor/data/services/doctor.service.impl';
 
 @Component({
   selector: 'app-doctors.component',
@@ -27,6 +29,7 @@ import {TableModule} from 'primeng/table';
   ],
   providers: [
     {provide: DOCTOR_REPOSITORY, useClass: DoctorRepositoryImpl},
+    {provide: DOCTOR_SERVICE_INJECTION_TOKEN, useClass: DoctorServiceImpl},
   ],
   templateUrl: './doctors.component.html',
   styleUrl: './doctors.component.css'

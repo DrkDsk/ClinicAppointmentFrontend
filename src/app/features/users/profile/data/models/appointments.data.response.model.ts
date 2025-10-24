@@ -1,5 +1,5 @@
 import {Links} from '../../../../../core/shared/domain/entities/links';
-import {Appointment} from '../../../domain/appointment';
+import {Appointment} from '../../../doctor/domain/entities/appointment';
 import {Meta} from '../../../../../core/shared/domain/entities/meta';
 
 export interface AppointmentDataResponseModel {
