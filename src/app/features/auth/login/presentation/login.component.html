@@ -1,14 +1,15 @@
-<div class="w-full flex h-screen dark:bg-primary-600 bg-surface-400">
+<div class="w-full flex h-screen bg-primary-500/30 dark:bg-primary-700">
   <div
-    class="h-10/12 lg:w-2/3 w-11/12 mx-4 flex flex-row my-auto md:mx-auto shadow-xl shadow-primary-800 rounded-2xl dark:bg-surface-200 bg-surface-600">
+    class="h-10/12 lg:w-2/3 w-11/12 mx-4 flex flex-row my-auto md:mx-auto shadow-sm shadow-primary-100 rounded-2xl bg-white/30">
 
-    <img [ngSrc]="photo" class="object-cover w-0 md:w-1/2 h-full rounded-tl-2xl rounded-bl-2xl" alt="" fill/>
+    <img [src]="photo" class="object-cover w-0 md:w-1/2 h-full rounded-tl-2xl rounded-bl-2xl" alt=""/>
 
     <div class="w-full lg:w-1/2 px-4 my-24 mx-auto">
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
         <div class="flex flex-row justify-center my-12">
-          <p class="text-white text-center text-4xl md:text-5xl lg:text-6xl">Iniciar Sesión</p>
+          <p class="text-primary-300 dark:text-primary-50 text-center text-4xl md:text-5xl lg:text-6xl">Iniciar
+            Sesión</p>
         </div>
 
         <input formControlName="username"
@@ -22,8 +23,9 @@
                placeholder="Password">
 
         <div class="flex flex-row mt-8">
-          <button class="text-white py-4 w-full rounded-3xl"
-                  [ngClass]="loginForm.valid ? 'bg-primary cursor-pointer' : 'bg-surface-300'" type="ngSubmit"
+          <button class="text-white py-4 w-full rounded-xl"
+                  [ngClass]="loginForm.valid ? 'bg-primary cursor-pointer' : 'bg-gray-500/30 dark:bg-gray-500'"
+                  type="ngSubmit"
                   [disabled]="!loginForm.valid">
             Enviar
           </button>
@@ -32,6 +34,4 @@
     </div>
 
   </div>
-
-
 </div>

@@ -59,14 +59,21 @@
             <ul class="list-none p-0 m-0 overflow-hidden">
               <li>
                 <a pRipple routerLink=""
-                   class="flex items-center cursor-pointer p-4 rounded-border text-primary-700 dark:text-primary-200 hover:bg-surface-100 dark:hover:bg-surface-700 duration-150 transition-colors p-ripple"><i
-                  class="pi pi-home mr-2"></i><span class="font-medium">Dashboard</span>
+                   class="flex items-center cursor-pointer p-4 rounded-border text-primary-700 dark:text-primary-200 hover:bg-surface-100 dark:hover:bg-surface-700 duration-150 transition-colors p-ripple">
+                  <span class="font-medium">Dashboard</span>
                 </a>
               </li>
               <li>
                 <a pRipple [routerLink]="AppPaths.homeProfile"
-                   class="flex items-center cursor-pointer p-4 rounded-border text-primary-700 dark:text-primary-200 hover:bg-surface-100 dark:hover:bg-surface-700 duration-150 transition-colors p-ripple"><i
-                  class="pi pi-user mr-2"></i><span class="font-medium">Perfiles</span>
+                   class="flex items-center cursor-pointer p-4 rounded-border text-primary-700 dark:text-primary-200 hover:bg-surface-100 dark:hover:bg-surface-700 duration-150 transition-colors p-ripple">
+                  <span
+                    class="font-medium">Perfiles</span>
+                </a>
+              </li>
+              <li>
+                <a pRipple [routerLink]="AppPaths.doctors"
+                   class="flex items-center cursor-pointer p-4 rounded-border text-primary-700 dark:text-primary-200 hover:bg-surface-100 dark:hover:bg-surface-700 duration-150 transition-colors p-ripple">
+                  <span class="font-medium">Doctores</span>
                 </a>
               </li>
             </ul>

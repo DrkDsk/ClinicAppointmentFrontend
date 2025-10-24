@@ -27,8 +27,8 @@ export class ProfileComponent implements OnInit {
   first = 0;
   perPage = 10;
   totalRecords = 0;
-  peopleQuery = ""
   enablePagination = true;
+  peopleQuery = ""
   private searchSubject = new Subject<string>();
 
   ngOnInit(): void {

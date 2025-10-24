@@ -16,6 +16,7 @@ import {AppPaths} from '../../../constants/path.constants';
 })
 
 export class DrawerComponent {
+  
   @Input() visible: boolean = true;
   @Output() visibleChange = new EventEmitter<boolean>();
 
