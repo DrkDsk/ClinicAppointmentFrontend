@@ -69,7 +69,9 @@
             <p-floatlabel variant="in">
               <p-select [options]="specialties"
                         id="specialty"
-                        formControlName="specialty" optionLabel="name"
+                        formControlName="specialty"
+                        optionLabel="name"
+                        appendTo="body"
                         class="w-full md:w-80"/>
               <label for="specialty">Selecciona una especialidad</label>
             </p-floatlabel>

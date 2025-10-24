@@ -8,8 +8,6 @@ import {InputText} from 'primeng/inputtext';
 import {debounceTime, distinctUntilChanged, Subject} from 'rxjs';
 import {Profile} from '../domain/entities/profile';
 import {CreateButton} from '../../../../core/shared/presentation/buttons/create-button/create-button';
-import {NavigationFacade} from '../../../../core/facade/navigation.facade';
-import {AppPaths} from '../../../../core/constants/path.constants';
 
 @Component({
   selector: 'app-people-component',
@@ -21,7 +19,7 @@ import {AppPaths} from '../../../../core/constants/path.constants';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private peopleService: PeopleService, private navigationFacade: NavigationFacade) {
+  constructor(private peopleService: PeopleService) {
   }
 
   people: Profile[] = [];
@@ -116,6 +114,5 @@ export class ProfileComponent implements OnInit {
   }
 
   navigateToCreateProfile = () => {
-    //this.navigationFacade.navigate(`${AppPaths.users}/${AppPaths.createProfile}`);
   };
 }
