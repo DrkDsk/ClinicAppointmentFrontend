@@ -1,7 +1,7 @@
 import {Observable} from "rxjs";
 import {DoctorsResponseModel} from "../models/doctors.response.model";
 import {SpecialtyResponseModel} from "../models/specialties.response.model";
-import {DoctorService} from './doctor.service';
+import {DoctorApiService} from './doctor.api.service';
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
@@ -9,7 +9,7 @@ import {HttpClient} from '@angular/common/http';
   providedIn: 'root'
 })
 
-export class DoctorServiceImpl implements DoctorService {
+export class DoctorApiServiceImpl implements DoctorApiService {
 
   constructor(private httpClient: HttpClient) {
   }

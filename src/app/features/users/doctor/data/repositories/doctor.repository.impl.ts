@@ -3,8 +3,8 @@ import {DoctorRepository} from '../../domain/repositories/doctor.repository';
 import {map, Observable} from "rxjs";
 import {SpecialtyResponseModel} from '../models/specialties.response.model';
 import {DoctorsResponseModel} from "../models/doctors.response.model";
-import {DoctorService} from '../services/doctor.service';
-import {DOCTOR_SERVICE_INJECTION_TOKEN} from '../services/doctor.service.injection.token';
+import {DoctorApiService} from '../services/doctor.api.service';
+import {DOCTOR_API_SERVICE_INJECTION_TOKEN} from '../services/doctor.api.service.injection.token';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ import {DOCTOR_SERVICE_INJECTION_TOKEN} from '../services/doctor.service.injecti
 
 export class DoctorRepositoryImpl implements DoctorRepository {
 
-  constructor(@Inject(DOCTOR_SERVICE_INJECTION_TOKEN) private doctorService: DoctorService) {
+  constructor(@Inject(DOCTOR_API_SERVICE_INJECTION_TOKEN) private doctorApiService: DoctorApiService) {
   }
 
 
@@ -20,7 +20,7 @@ export class DoctorRepositoryImpl implements DoctorRepository {
     page = page ?? 1;
     perPage = perPage ?? 10;
 
-    const request = this.doctorService.getDoctors(page, perPage);
+    const request = this.doctorApiService.getDoctors(page, perPage);
 
     return request.pipe(
       map(response => response),
@@ -28,7 +28,7 @@ export class DoctorRepositoryImpl implements DoctorRepository {
   }
 
   getSpecialties(): Observable<SpecialtyResponseModel> {
-    const request = this.doctorService.getSpecialties();
+    const request = this.doctorApiService.getSpecialties();
 
     return request.pipe(
       map(response => response),

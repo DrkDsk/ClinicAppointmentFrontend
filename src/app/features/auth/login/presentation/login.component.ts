@@ -46,6 +46,13 @@ import {AppPaths} from '../../../../core/constants/path.constants';
 })
 
 export class LoginComponent {
+
+  constructor(@Inject(AUTH_REPOSITORY) private loginRepository: AuthRepository,
+              private tokenService: TokenService,
+              private roleService: RoleService,
+              private navigationFacade: NavigationFacade) {
+  }
+
   photo = "assets/images/bg1.jpg";
 
   loginForm = new FormGroup({
@@ -59,12 +66,6 @@ export class LoginComponent {
       validators: [Validators.required, Validators.minLength(6)]
     })
   });
-
-  constructor(@Inject(AUTH_REPOSITORY) private loginRepository: AuthRepository,
-              private tokenService: TokenService,
-              private roleService: RoleService,
-              private navigationFacade: NavigationFacade) {
-  }
 
   get username() {
     return this.loginForm.get('username')?.value ?? ""

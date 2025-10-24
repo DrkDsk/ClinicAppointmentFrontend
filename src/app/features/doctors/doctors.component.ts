@@ -13,8 +13,8 @@ import {InputText} from 'primeng/inputtext';
 import {debounceTime, distinctUntilChanged, Subject} from 'rxjs';
 import {PrimeTemplate} from 'primeng/api';
 import {TableModule} from 'primeng/table';
-import {DOCTOR_SERVICE_INJECTION_TOKEN} from '../users/doctor/data/services/doctor.service.injection.token';
-import {DoctorServiceImpl} from '../users/doctor/data/services/doctor.service.impl';
+import {DOCTOR_API_SERVICE_INJECTION_TOKEN} from '../users/doctor/data/services/doctor.api.service.injection.token';
+import {DoctorApiServiceImpl} from '../users/doctor/data/services/doctor.api.service.impl';
 
 @Component({
   selector: 'app-doctors.component',
@@ -29,7 +29,7 @@ import {DoctorServiceImpl} from '../users/doctor/data/services/doctor.service.im
   ],
   providers: [
     {provide: DOCTOR_REPOSITORY, useClass: DoctorRepositoryImpl},
-    {provide: DOCTOR_SERVICE_INJECTION_TOKEN, useClass: DoctorServiceImpl},
+    {provide: DOCTOR_API_SERVICE_INJECTION_TOKEN, useClass: DoctorApiServiceImpl},
   ],
   templateUrl: './doctors.component.html',
   styleUrl: './doctors.component.css'

@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {TableModule} from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
 import {FormsModule} from '@angular/forms';
-import {ProfileServiceImpl} from '../data/services/profile.service.impl';
+import {ProfileApiServiceImpl} from '../data/services/profile.api.service.impl';
 import {FloatLabel} from 'primeng/floatlabel';
 import {InputText} from 'primeng/inputtext';
 import {debounceTime, distinctUntilChanged, Subject} from 'rxjs';
@@ -19,7 +19,7 @@ import {ProfileRepository} from '../domain/repositories/profile.repository';
   ],
   providers: [
     {provide: PROFILE_REPOSITORY_TOKEN, useClass: ProfileRepositoryImpl},
-    {provide: PROFILE_API_SERVICE_TOKEN, useClass: ProfileServiceImpl}
+    {provide: PROFILE_API_SERVICE_TOKEN, useClass: ProfileApiServiceImpl}
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
