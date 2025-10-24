@@ -1,8 +1,10 @@
 import {Routes} from '@angular/router';
 import {NoDrawerLayoutComponent} from './core/shared/presentation/no-drawer-layout/no-drawer-layout.component';
 import {DrawerComponent} from './core/shared/presentation/drawer/drawer.component';
-import {authGuard} from './core/guards/auth-guard';
-import {roleGuard} from './core/guards/role-guard';
+import {authGuard} from './core/guards/auth.guard';
+import {roleGuard} from './core/guards/role.guard';
+import {noAuthGuard} from './core/guards/no.auth.guard';
+import {AppPaths} from './core/constants/path.constants';
 
 export const routes: Routes = [
   {
@@ -11,7 +13,9 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        loadComponent: () => import('./features/home/presentation/home-component').then(m => m.HomeComponent)
+        loadComponent: () =>
+          import('./features/home/presentation/home-component')
+            .then(m => m.HomeComponent)
       }
     ]
   },
@@ -22,22 +26,36 @@ export const routes: Routes = [
     canActivateChild: [roleGuard],
     children: [
       {
-        path: 'dashboard',
-        loadComponent: () => import('./features/dashboard/presentation/dashboard-component').then(m => m.DashboardComponent)
+        path: AppPaths.dashboard,
+        loadComponent: () =>
+          import('./features/dashboard/presentation/dashboard-component')
+            .then(m => m.DashboardComponent)
       },
       {
-        path: 'users',
+        path: AppPaths.users,
         children: [
           {
-            path: 'people',
-            loadComponent: () => import('./features/users/presentation/people-component/people-component').then(m => m.PeopleComponent)
+            path: AppPaths.profile,
+            loadComponent: () =>
+              import('./features/users/profile/presentation/profile.component')
+                .then(m => m.ProfileComponent),
+          },
+          {
+            path: AppPaths.createDoctor,
+            loadComponent: () =>
+              import('./features/users/doctor/presentation/create-doctor.component/create-doctor.component')
+                .then(m => m.CreateDoctorComponent),
           }
         ]
-      }
+      },
+
     ]
   },
   {
-    path: 'login',
-    loadComponent: () => import('./features/auth/login/presentation/login.component').then(m => m.LoginComponent)
+    path: AppPaths.login,
+    canActivate: [noAuthGuard],
+    loadComponent: () =>
+      import('./features/auth/login/presentation/login.component')
+        .then(m => m.LoginComponent)
   }
 ];

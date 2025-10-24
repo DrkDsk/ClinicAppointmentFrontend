@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { DrawerComponent } from './drawer.component';
+import {DrawerComponent} from './drawer.component';
 
 describe('DrawerComponent', () => {
   let component: DrawerComponent;
@@ -10,14 +10,14 @@ describe('DrawerComponent', () => {
     await TestBed.configureTestingModule({
       imports: [DrawerComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(DrawerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create-button', () => {
     expect(component).toBeTruthy();
   });
 });

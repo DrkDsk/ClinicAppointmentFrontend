@@ -16,8 +16,9 @@ import {AuthRepositoryImpl} from '../data/repositories/auth.repository.impl';
 import {AuthRepository} from '../domain/repositories/auth.repository';
 import {AUTH_API_SERVICE} from '../data/services/auth_api.service.injection.token';
 import {AUTH_REPOSITORY} from '../domain/repositories/auth.repository.injection.token';
-import {NgClass} from '@angular/common';
+import {NgClass, NgOptimizedImage} from '@angular/common';
 import {RoleService} from '../../../../core/shared/data/services/role/role.service';
+import {AppPaths} from '../../../../core/constants/path.constants';
 
 @Component({
   selector: 'app-login.component',
@@ -34,7 +35,8 @@ import {RoleService} from '../../../../core/shared/data/services/role/role.servi
     InputTextModule,
     SelectModule,
     InputNumberModule,
-    NgClass
+    NgClass,
+    NgOptimizedImage
   ],
   providers: [
     {provide: AUTH_API_SERVICE, useClass: AuthApiServiceImpl},
@@ -45,7 +47,6 @@ import {RoleService} from '../../../../core/shared/data/services/role/role.servi
 })
 
 export class LoginComponent {
-  drawerVisible = false;
   photo = "assets/images/bg1.jpg";
 
   loginForm = new FormGroup({
@@ -59,7 +60,7 @@ export class LoginComponent {
       validators: [Validators.required, Validators.minLength(6)]
     })
   });
-
+  
   constructor(@Inject(AUTH_REPOSITORY) private loginRepository: AuthRepository,
               private tokenService: TokenService,
               private roleService: RoleService,
@@ -81,7 +82,7 @@ export class LoginComponent {
 
     request.subscribe({
       next: (response) => {
-        this.navigationFacade.navigate("dashboard")
+        this.navigationFacade.navigate(AppPaths.dashboard)
         this.tokenService.setToken(response.token);
         const roles = response.roles.map(role => role.name);
         this.roleService.setRoles(roles)

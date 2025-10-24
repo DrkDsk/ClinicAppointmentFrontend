@@ -1,0 +1,94 @@
+<div
+  class="my-4 rounded-sm shadow-sm shadow-primary-100
+    dark:shadow-primary-800 flex justify-center p-4">
+  <p-stepper [value]="1" class="w-full">
+    <p-step-list>
+      <p-step [value]="1">Perfil</p-step>
+      <p-step [value]="2">Doctor</p-step>
+    </p-step-list>
+    <p-step-panels>
+      <p-step-panel [value]="1">
+        <ng-template pTemplate="content" let-activateCallback="activateCallback">
+
+          <form [formGroup]="profileForm">
+            <div class="w-1/2 mx-auto">
+              <div class="grid grid-cols-1 gap-8">
+
+                <p-floatlabel variant="in">
+                  <input pInputText id="name"
+                         formControlName="name"
+                         maxlength="50"
+                         autocomplete="off"
+                         class="w-full"/>
+                  <label for="name">Nombre</label>
+                </p-floatlabel>
+
+                <p-floatlabel variant="in">
+                  <input pInputText id="email" formControlName="email" autocomplete="off" class="w-full"/>
+                  <label for="email">Correo electrónico</label>
+                </p-floatlabel>
+
+                <p-floatlabel variant="in">
+                  <p-datepicker
+                    formControlName="birthdate"
+                    dateFormat="dd.mm.yy"
+                    [showIcon]="true"
+                    inputId="buttondisplay"
+                    id="calendar"
+                    appendTo="body"
+                    class="w-full"
+                  ></p-datepicker>
+                  <label for="calendar">Fecha de nacimiento</label>
+                </p-floatlabel>
+
+                <p-floatlabel variant="in">
+                  <input pInputText id="phoneNumber"
+                         formControlName="phoneNumber"
+                         autocomplete="off"
+                         class="w-full"
+                         maxlength="10"
+                  />
+                  <label for="phoneNumber">Número telefónico</label>
+                </p-floatlabel>
+              </div>
+            </div>
+          </form>
+
+          <div class="flex pt-6 justify-end">
+            <app-medium-botton [disabled]="!profileForm.valid"
+                               (click)="activateCallback(2)"
+                               [title]="'Continuar'">
+            </app-medium-botton>
+          </div>
+        </ng-template>
+      </p-step-panel>
+
+      <p-step-panel [value]="2">
+        <ng-template pTemplate="content" let-activateCallback="activateCallback">
+          <form [formGroup]="doctorForm" (ngSubmit)="onSubmit()">
+            <p-floatlabel variant="in">
+              <p-select [options]="specialties"
+                        id="specialty"
+                        formControlName="specialty"
+                        optionLabel="name"
+                        appendTo="body"
+                        class="w-full md:w-80"/>
+              <label for="specialty">Selecciona una especialidad</label>
+            </p-floatlabel>
+          </form>
+
+          <div class="flex pt-6 justify-between">
+            <app-medium-botton
+              (click)="activateCallback(1)"
+              [title]="'Regresar'"/>
+
+            <app-medium-botton [disabled]="!doctorForm.valid"
+                               (click)="onSubmit()"
+                               [title]="'Registrar'"/>
+          </div>
+        </ng-template>
+      </p-step-panel>
+
+    </p-step-panels>
+  </p-stepper>
+</div>

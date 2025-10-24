@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SolutionsComponent } from './solutions-component';
+import {SolutionsComponent} from './solutions-component';
 
 describe('SolutionsComponent', () => {
   let component: SolutionsComponent;
@@ -10,14 +10,14 @@ describe('SolutionsComponent', () => {
     await TestBed.configureTestingModule({
       imports: [SolutionsComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(SolutionsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create-button', () => {
     expect(component).toBeTruthy();
   });
 });

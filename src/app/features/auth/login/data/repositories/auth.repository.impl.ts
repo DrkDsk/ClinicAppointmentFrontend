@@ -15,14 +15,6 @@ export class AuthRepositoryImpl implements AuthRepository {
   constructor(@Inject(AUTH_API_SERVICE) private authApiService: AuthApiService) {
   }
 
-  isAuthenticated(): Observable<boolean> {
-    const request = this.authApiService.getAuthentication();
-
-    return request.pipe(
-      map(response => response.data != null),
-    )
-  }
-
   login(credentials: LoginCredentials): Observable<LoginResponseModel> {
     const request = this.authApiService.login(credentials);
 
