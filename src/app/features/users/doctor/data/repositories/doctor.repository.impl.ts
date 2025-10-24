@@ -15,7 +15,6 @@ export class DoctorRepositoryImpl implements DoctorRepository {
   constructor(@Inject(DOCTOR_API_SERVICE_INJECTION_TOKEN) private doctorApiService: DoctorApiService) {
   }
 
-
   getDoctors(page: number = 1, perPage: number = 10): Observable<DoctorsResponseModel> {
     page = page ?? 1;
     perPage = perPage ?? 10;
