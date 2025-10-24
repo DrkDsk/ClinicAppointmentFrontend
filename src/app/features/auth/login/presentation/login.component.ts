@@ -8,15 +8,15 @@ import {InputTextModule} from 'primeng/inputtext';
 import {SelectModule} from 'primeng/select';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {PasswordModule} from 'primeng/password';
-import {AuthApiServiceImpl} from '../data/services/auth_api.service.impl';
+import {AuthApiServiceImpl} from '../data/services/auth.api.service.impl';
 import {TokenService} from '../../../../core/shared/data/services/token/token.service';
 import {NavigationFacade} from '../../../../core/facade/navigation.facade';
 import {LoginCredentials} from '../domain/entities/credential';
 import {AuthRepositoryImpl} from '../data/repositories/auth.repository.impl';
 import {AuthRepository} from '../domain/repositories/auth.repository';
-import {AUTH_API_SERVICE} from '../data/services/auth_api.service.injection.token';
+import {AUTH_API_SERVICE} from '../data/services/auth.api.service.injection.token';
 import {AUTH_REPOSITORY} from '../domain/repositories/auth.repository.injection.token';
-import {NgClass, NgOptimizedImage} from '@angular/common';
+import {NgClass} from '@angular/common';
 import {RoleService} from '../../../../core/shared/data/services/role/role.service';
 import {AppPaths} from '../../../../core/constants/path.constants';
 
@@ -36,7 +36,6 @@ import {AppPaths} from '../../../../core/constants/path.constants';
     SelectModule,
     InputNumberModule,
     NgClass,
-    NgOptimizedImage
   ],
   providers: [
     {provide: AUTH_API_SERVICE, useClass: AuthApiServiceImpl},
@@ -47,6 +46,13 @@ import {AppPaths} from '../../../../core/constants/path.constants';
 })
 
 export class LoginComponent {
+
+  constructor(@Inject(AUTH_REPOSITORY) private loginRepository: AuthRepository,
+              private tokenService: TokenService,
+              private roleService: RoleService,
+              private navigationFacade: NavigationFacade) {
+  }
+
   photo = "assets/images/bg1.jpg";
 
   loginForm = new FormGroup({
@@ -60,12 +66,6 @@ export class LoginComponent {
       validators: [Validators.required, Validators.minLength(6)]
     })
   });
-  
-  constructor(@Inject(AUTH_REPOSITORY) private loginRepository: AuthRepository,
-              private tokenService: TokenService,
-              private roleService: RoleService,
-              private navigationFacade: NavigationFacade) {
-  }
 
   get username() {
     return this.loginForm.get('username')?.value ?? ""

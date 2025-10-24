@@ -39,16 +39,21 @@ export const routes: Routes = [
             loadComponent: () =>
               import('./features/users/profile/presentation/profile.component')
                 .then(m => m.ProfileComponent),
-          },
-          {
-            path: AppPaths.createDoctor,
-            loadComponent: () =>
-              import('./features/users/doctor/presentation/create-doctor.component/create-doctor.component')
-                .then(m => m.CreateDoctorComponent),
           }
         ]
       },
+      {
+        path: AppPaths.doctors,
+        loadComponent: () =>
+          import("./features/doctors/doctors.component").then(m => m.DoctorsComponent),
+      },
+      {
+        path: AppPaths.createDoctor,
+        loadComponent: () =>
+          import('./features/users/doctor/presentation/create-doctor.component/create-doctor.component')
+            .then(m => m.CreateDoctorComponent),
 
+      }
     ]
   },
   {

@@ -1,25 +1,32 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {TableModule} from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
 import {FormsModule} from '@angular/forms';
-import {PeopleService} from '../../data/services/people.service';
+import {ProfileApiServiceImpl} from '../data/services/profile.api.service.impl';
 import {FloatLabel} from 'primeng/floatlabel';
 import {InputText} from 'primeng/inputtext';
 import {debounceTime, distinctUntilChanged, Subject} from 'rxjs';
 import {Profile} from '../domain/entities/profile';
-import {CreateButton} from '../../../../core/shared/presentation/buttons/create-button/create-button';
+import {PROFILE_REPOSITORY_TOKEN} from '../domain/repositories/profile.repository.injection.token';
+import {ProfileRepositoryImpl} from '../data/repositories/profile.repository.impl';
+import {PROFILE_API_SERVICE_TOKEN} from '../data/services/profile.api.service.injection.token';
+import {ProfileRepository} from '../domain/repositories/profile.repository';
 
 @Component({
   selector: 'app-people-component',
   imports: [
-    TableModule, ButtonModule, FormsModule, FloatLabel, InputText, CreateButton
+    TableModule, ButtonModule, FormsModule, FloatLabel, InputText
+  ],
+  providers: [
+    {provide: PROFILE_REPOSITORY_TOKEN, useClass: ProfileRepositoryImpl},
+    {provide: PROFILE_API_SERVICE_TOKEN, useClass: ProfileApiServiceImpl}
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private peopleService: PeopleService) {
+  constructor(@Inject(PROFILE_REPOSITORY_TOKEN) private profileRepository: ProfileRepository) {
   }
 
   people: Profile[] = [];
@@ -27,8 +34,8 @@ export class ProfileComponent implements OnInit {
   first = 0;
   perPage = 10;
   totalRecords = 0;
-  peopleQuery = ""
   enablePagination = true;
+  peopleQuery = ""
   private searchSubject = new Subject<string>();
 
   ngOnInit(): void {
@@ -41,7 +48,7 @@ export class ProfileComponent implements OnInit {
         this.callToSearchPeople(valor)
       });
 
-    this.getPeoplePaginateService()
+    this.getProfilePaginateService()
   }
 
   onQueryChange(value: string) {
@@ -53,13 +60,13 @@ export class ProfileComponent implements OnInit {
     this.first = this.first + perPage;
     const page = this.first / perPage + 1;
 
-    this.getPeoplePaginateService(page, perPage);
+    this.getProfilePaginateService(page, perPage);
   }
 
   callToSearchPeople(query: string) {
     if (!query.length) {
       this.enablePagination = true;
-      this.getPeoplePaginateService()
+      this.getProfilePaginateService()
       return;
     }
 
@@ -67,7 +74,7 @@ export class ProfileComponent implements OnInit {
       this.originalPeople = [...this.people];
     }
 
-    this.peopleService.search(query).subscribe((response) => {
+    this.profileRepository.search(query).subscribe((response) => {
       this.people = response.data
       this.enablePagination = false
     })
@@ -78,14 +85,14 @@ export class ProfileComponent implements OnInit {
     this.first = this.first - perPage;
     const page = this.first / perPage + 1;
 
-    this.getPeoplePaginateService(page, perPage);
+    this.getProfilePaginateService(page, perPage);
   }
 
   reset() {
     this.first = 0;
     this.perPage = 10;
     this.totalRecords = 0;
-    this.getPeoplePaginateService()
+    this.getProfilePaginateService()
   }
 
   isLastPage(): boolean {
@@ -103,16 +110,13 @@ export class ProfileComponent implements OnInit {
     this.first = first
     const page = first / perPage + 1;
 
-    this.getPeoplePaginateService(page, perPage);
+    this.getProfilePaginateService(page, perPage);
   }
 
-  getPeoplePaginateService(page?: number, perPage?: number) {
-    this.peopleService.getAppointments(page, perPage).subscribe((response) => {
+  getProfilePaginateService(page?: number, perPage?: number) {
+    this.profileRepository.getProfilePaginate(page, perPage).subscribe((response) => {
       this.people = response.data;
       this.totalRecords = response.meta?.total ?? 0;
     });
   }
-
-  navigateToCreateProfile = () => {
-  };
 }

@@ -1,4 +1,8 @@
 <div>
+  <div class="flex justify-end my-3 ">
+    <app-create-button [title]="'Registrar'" [onClick]="navigateToCreateProfile"></app-create-button>
+  </div>
+
   <div class="mb-4 flex w-full">
     <div class="w-1/2">
       <p-button type="button" icon="pi pi-chevron-left" (click)="prev()" [disabled]="isFirstPage()" text/>
@@ -10,21 +14,22 @@
       <div class="w-2/3">
         <p-floatlabel variant="on">
           <input class="w-full" pInputText id="on_label" (ngModelChange)="onQueryChange($event)"
-                 [(ngModel)]="peopleQuery" autocomplete="off"/>
-          <label for="on_label">Buscar perfil</label>
+                 [(ngModel)]="doctorQuery" autocomplete="off"/>
+          <label for="on_label">Buscar doctor</label>
         </p-floatlabel>
       </div>
     </div>
   </div>
+
   <div>
     <p-table
-      [value]="people"
+      [value]="doctors"
       [paginator]="enablePagination"
       [rows]="perPage"
       [first]="first"
       [totalRecords]="totalRecords"
       [lazy]="true"
-      (onLazyLoad)="loadPeople($event)"
+      (onLazyLoad)="loadDoctors($event)"
       [rowsPerPageOptions]="[10, 25, 50]"
       [showCurrentPageReport]="true"
       [tableStyle]="{ 'min-width': '50rem' }"
@@ -35,15 +40,13 @@
       <ng-template pTemplate="header">
         <tr>
           <th style="width:25%">Nombre</th>
-          <th style="width:25%">Correo electrónico</th>
-          <th style="width:25%">Teléfono</th>
+          <th style="width:25%">Especialidad</th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-person>
+      <ng-template pTemplate="body" let-doctor>
         <tr>
-          <td>{{ person.name }}</td>
-          <td>{{ person.email }}</td>
-          <td>{{ person.phone }}</td>
+          <td>{{ doctor.profile.name }}</td>
+          <td>{{ doctor.specialty }}</td>
         </tr>
       </ng-template>
     </p-table>
