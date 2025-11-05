@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./tokens-color.css";
 
 @plugin "tailwindcss-primeui";
 
