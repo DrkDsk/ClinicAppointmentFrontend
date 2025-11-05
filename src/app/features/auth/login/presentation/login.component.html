@@ -1,41 +1,40 @@
-<div class="w-full flex h-screen bg-primary-500/30 dark:bg-primary-700">
+<div class="w-full flex h-screen bg-surface-0">
   <div
-    class="h-10/12 lg:w-2/3 w-11/12 mx-4 flex flex-row my-auto md:mx-auto shadow-sm shadow-primary-100 rounded-2xl bg-white/30">
+    class="h-10/12 lg:w-2/3 w-11/12 mx-4 flex flex-row my-auto md:mx-auto shadow-sm shadow-surface-100 rounded-2xl bg-surface-50">
 
     <img [src]="photo" class="object-cover w-0 md:w-1/2 h-full rounded-tl-2xl rounded-bl-2xl" alt=""/>
 
-    <div class="w-full lg:w-1/2 px-4 my-24 mx-auto">
+    <div class="w-full lg:w-1/2 px-4 my-24 mx-auto text-color">
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
         <div class="flex flex-row justify-center my-12">
-          <p class="text-primary-300 dark:text-primary-50 text-center text-4xl md:text-5xl lg:text-6xl">Iniciar
+          <p class="text-center text-4xl md:text-5xl lg:text-6xl">Iniciar
             Sesión</p>
         </div>
 
         <input formControlName="username"
-               class="bg-surface-300 dark:bg-surface-400 w-full px-4 py-4 rounded-lg text-surface-500 dark:text-surface-700 focus:text-white focus:outline-none focus:border focus:border-white"
+               class="dark:bg-surface-50 bg-surface-0 w-full px-4 py-4 rounded-lg focus:outline-none border border-surface-100"
                placeholder="Email">
 
         <div class="my-6"></div>
 
         <input formControlName="password"
-               class="bg-surface-300 dark:bg-surface-400 w-full px-4 py-4 rounded-lg text-surface-500 dark:text-surface-700 focus:outline-none focus:text-white focus:border focus:border-white"
+               class="dark:bg-surface-50 bg-surface-0 w-full px-4 py-4 rounded-lg focus:outline-none border border-surface-100"
                placeholder="Password">
 
 
-        <p class="text-red-300 font-bold text-lg my-4 mx-1">
+        <p class="bg-mint-200 font-bold text-lg my-4 mx-1">
           {{ errorMessage }}
         </p>
 
         <div class="flex flex-row mt-8">
-          <button class="text-white py-4 w-full rounded-xl"
-                  [ngClass]="loginForm.valid ? 'bg-primary cursor-pointer' : 'bg-gray-500/30 dark:bg-gray-500'"
+          <button class="py-4 w-full rounded-xl"
+                  [ngClass]="loginForm.valid ? 'bg-primary cursor-pointer text-surface-100 dark:text-color' : 'bg-surface-100'"
                   type="ngSubmit" [disabled]="!loginForm.valid">
             Enviar
           </button>
         </div>
       </form>
     </div>
-
   </div>
 </div>
