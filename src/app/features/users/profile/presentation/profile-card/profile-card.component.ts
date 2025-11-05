@@ -1,4 +1,4 @@
-import {Component, inject, Inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {Avatar} from 'primeng/avatar';
 import {Ripple} from 'primeng/ripple';
 import {Profile} from '../../domain/entities/profile';
