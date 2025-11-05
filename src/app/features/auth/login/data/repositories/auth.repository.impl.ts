@@ -1,10 +1,11 @@
-import {map, Observable} from "rxjs";
+import {catchError, map, Observable, throwError} from "rxjs";
 import {LoginCredentials} from "../../domain/entities/credential";
 import {AuthRepository} from "../../domain/repositories/auth.repository";
-import {Inject, Injectable} from "@angular/core";
+import {inject, Inject, Injectable} from "@angular/core";
 import {AuthApiService} from "../services/auth.api.service";
 import {LoginResponseModel} from '../models/login.response.model';
 import {AUTH_API_SERVICE} from '../services/auth.api.service.injection.token';
+import {AuthApiServiceImpl} from '../services/auth.api.service.impl';
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +13,22 @@ import {AUTH_API_SERVICE} from '../services/auth.api.service.injection.token';
 
 export class AuthRepositoryImpl implements AuthRepository {
 
-  constructor(@Inject(AUTH_API_SERVICE) private authApiService: AuthApiService) {
-  }
+  private authApiService: AuthApiService = inject(AuthApiServiceImpl);
 
   login(credentials: LoginCredentials): Observable<LoginResponseModel> {
     const request = this.authApiService.login(credentials);
 
     return request.pipe(
-      map(response => response)
+      map(response => response),
+      catchError((err, caught) => {
+
+        console.log({
+          error: err
+        })
+
+        return throwError(() => err);
+
+      })
     );
   }
 }

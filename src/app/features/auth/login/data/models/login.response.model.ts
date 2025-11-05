@@ -1,6 +1,11 @@
-import {Role} from '../../../../../core/shared/domain/entities/roles';
+import {User} from '../../../../dashboard/domain/entities/user';
+
+export interface LoginResponseDataModel {
+  token: string,
+  user: User
+}
 
 export interface LoginResponseModel {
-  token: string,
-  roles: Role[]
+  data: LoginResponseDataModel,
+  message: string
 }

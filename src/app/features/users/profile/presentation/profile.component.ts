@@ -1,33 +1,25 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {TableModule} from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
 import {FormsModule} from '@angular/forms';
-import {ProfileApiServiceImpl} from '../data/services/profile.api.service.impl';
 import {FloatLabel} from 'primeng/floatlabel';
 import {InputText} from 'primeng/inputtext';
 import {debounceTime, distinctUntilChanged, Subject} from 'rxjs';
 import {Profile} from '../domain/entities/profile';
-import {PROFILE_REPOSITORY_TOKEN} from '../domain/repositories/profile.repository.injection.token';
-import {ProfileRepositoryImpl} from '../data/repositories/profile.repository.impl';
-import {PROFILE_API_SERVICE_TOKEN} from '../data/services/profile.api.service.injection.token';
 import {ProfileRepository} from '../domain/repositories/profile.repository';
+import {ProfileRepositoryImpl} from '../data/repositories/profile.repository.impl';
 
 @Component({
   selector: 'app-people-component',
   imports: [
     TableModule, ButtonModule, FormsModule, FloatLabel, InputText
   ],
-  providers: [
-    {provide: PROFILE_REPOSITORY_TOKEN, useClass: ProfileRepositoryImpl},
-    {provide: PROFILE_API_SERVICE_TOKEN, useClass: ProfileApiServiceImpl}
-  ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(@Inject(PROFILE_REPOSITORY_TOKEN) private profileRepository: ProfileRepository) {
-  }
+  private profileRepository: ProfileRepository = inject(ProfileRepositoryImpl)
 
   people: Profile[] = [];
   originalPeople: Profile[] = [];
@@ -114,7 +106,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getProfilePaginateService(page?: number, perPage?: number) {
-    this.profileRepository.getProfilePaginate(page, perPage).subscribe((response) => {
+    this.profileRepository.getProfilesPaginate(page, perPage).subscribe((response) => {
       this.people = response.data;
       this.totalRecords = response.meta?.total ?? 0;
     });
