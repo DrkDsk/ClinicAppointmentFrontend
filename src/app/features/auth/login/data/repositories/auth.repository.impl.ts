@@ -4,7 +4,6 @@ import {AuthRepository} from "../../domain/repositories/auth.repository";
 import {inject, Inject, Injectable} from "@angular/core";
 import {AuthApiService} from "../services/auth.api.service";
 import {LoginResponseModel} from '../models/login.response.model';
-import {AUTH_API_SERVICE} from '../services/auth.api.service.injection.token';
 import {AuthApiServiceImpl} from '../services/auth.api.service.impl';
 
 @Injectable({

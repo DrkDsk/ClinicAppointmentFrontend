@@ -1,11 +1,10 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {CreateButton} from '../../core/shared/presentation/buttons/create-button/create-button';
 import {NavigationFacade} from '../../core/facade/navigation.facade';
 import {AppPaths} from '../../core/constants/path.constants';
 import {Button} from 'primeng/button';
 import {Doctor} from '../users/doctor/domain/entities/doctor';
 import {DoctorRepository} from '../users/doctor/domain/repositories/doctor.repository';
-import {DOCTOR_REPOSITORY} from '../users/doctor/domain/repositories/doctor.repository.injection.token';
 import {DoctorRepositoryImpl} from '../users/doctor/data/repositories/doctor.repository.impl';
 import {FloatLabel} from 'primeng/floatlabel';
 import {FormsModule} from '@angular/forms';
@@ -13,8 +12,6 @@ import {InputText} from 'primeng/inputtext';
 import {debounceTime, distinctUntilChanged, Subject} from 'rxjs';
 import {PrimeTemplate} from 'primeng/api';
 import {TableModule} from 'primeng/table';
-import {DOCTOR_API_SERVICE_INJECTION_TOKEN} from '../users/doctor/data/services/doctor.api.service.injection.token';
-import {DoctorApiServiceImpl} from '../users/doctor/data/services/doctor.api.service.impl';
 
 @Component({
   selector: 'app-doctors.component',
@@ -27,19 +24,13 @@ import {DoctorApiServiceImpl} from '../users/doctor/data/services/doctor.api.ser
     PrimeTemplate,
     TableModule
   ],
-  providers: [
-    {provide: DOCTOR_REPOSITORY, useClass: DoctorRepositoryImpl},
-    {provide: DOCTOR_API_SERVICE_INJECTION_TOKEN, useClass: DoctorApiServiceImpl},
-  ],
   templateUrl: './doctors.component.html',
   styleUrl: './doctors.component.css'
 })
 export class DoctorsComponent implements OnInit {
 
-  constructor(
-    private navigationFacade: NavigationFacade,
-    @Inject(DOCTOR_REPOSITORY) private doctorRepository: DoctorRepository) {
-  }
+  private doctorRepository: DoctorRepository = inject(DoctorRepositoryImpl)
+  private navigationFacade: NavigationFacade = inject(NavigationFacade)
 
   doctors: Doctor[] = [];
   originalDoctors: Doctor[] = [];

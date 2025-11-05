@@ -1,4 +1,4 @@
-import {Component, Inject} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {ButtonModule} from 'primeng/button';
 import {CardModule} from 'primeng/card';
@@ -8,14 +8,11 @@ import {InputTextModule} from 'primeng/inputtext';
 import {SelectModule} from 'primeng/select';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {PasswordModule} from 'primeng/password';
-import {AuthApiServiceImpl} from '../data/services/auth.api.service.impl';
 import {TokenService} from '../../../../core/shared/data/services/token/token.service';
 import {NavigationFacade} from '../../../../core/facade/navigation.facade';
 import {LoginCredentials} from '../domain/entities/credential';
 import {AuthRepositoryImpl} from '../data/repositories/auth.repository.impl';
 import {AuthRepository} from '../domain/repositories/auth.repository';
-import {AUTH_API_SERVICE} from '../data/services/auth.api.service.injection.token';
-import {AUTH_REPOSITORY} from '../domain/repositories/auth.repository.injection.token';
 import {NgClass} from '@angular/common';
 import {RoleService} from '../../../../core/shared/data/services/role/role.service';
 import {AppPaths} from '../../../../core/constants/path.constants';
@@ -37,24 +34,19 @@ import {AppPaths} from '../../../../core/constants/path.constants';
     InputNumberModule,
     NgClass
   ],
-  providers: [
-    { provide: AUTH_API_SERVICE, useClass: AuthApiServiceImpl },
-    { provide: AUTH_REPOSITORY, useClass: AuthRepositoryImpl }
-  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 
 export class LoginComponent {
 
-  constructor(@Inject(AUTH_REPOSITORY) private loginRepository: AuthRepository,
-    private tokenService: TokenService,
-    private roleService: RoleService,
-    private navigationFacade: NavigationFacade) {
-  }
+  private loginRepository: AuthRepository = inject(AuthRepositoryImpl)
+  private tokenService: TokenService = inject(TokenService)
+  private roleService: RoleService = inject(RoleService)
+  private navigationFacade: NavigationFacade = inject(NavigationFacade)
 
   photo = "assets/images/bg1.jpg";
-  errorMessage : string | undefined | null = null
+  errorMessage: string | undefined | null = null
 
   loginForm = new FormGroup({
     username: new FormControl<string>('', {
@@ -77,13 +69,13 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    const credentials: LoginCredentials = { email: this.username, password: this.password }
+    const credentials: LoginCredentials = {email: this.username, password: this.password}
 
     const request = this.loginRepository.login(credentials)
 
     request.subscribe({
       next: (response) => {
-        let data= response.data;
+        let data = response.data;
         let profile = data.user;
 
         let token = data.token;

@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {Step, StepList, StepPanel, StepPanels, Stepper} from 'primeng/stepper';
 import {PrimeTemplate} from 'primeng/api';
 import {FloatLabel} from 'primeng/floatlabel';
@@ -8,7 +8,6 @@ import {DatePicker} from 'primeng/datepicker';
 import {MediumBotton} from '../../../../../core/shared/presentation/buttons/medium-botton/medium-botton';
 import {Select} from 'primeng/select';
 import {Specialty} from '../../domain/entities/specialty';
-import {DOCTOR_REPOSITORY} from '../../domain/repositories/doctor.repository.injection.token';
 import {DoctorRepositoryImpl} from '../../data/repositories/doctor.repository.impl';
 import {DoctorRepository} from '../../domain/repositories/doctor.repository';
 
@@ -29,17 +28,12 @@ import {DoctorRepository} from '../../domain/repositories/doctor.repository';
     MediumBotton,
     Select
   ],
-  providers: [
-    {provide: DOCTOR_REPOSITORY, useClass: DoctorRepositoryImpl},
-  ],
   templateUrl: './create-doctor.component.html',
   styleUrl: './create-doctor.component.css'
 })
 export class CreateDoctorComponent implements OnInit {
 
-  constructor(@Inject(DOCTOR_REPOSITORY) private doctorRepository: DoctorRepository) {
-  }
-
+  private doctorRepository: DoctorRepository = inject(DoctorRepositoryImpl)
   specialties: Specialty[] = [];
 
   ngOnInit(): void {
