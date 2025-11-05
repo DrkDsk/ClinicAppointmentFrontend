@@ -6,17 +6,20 @@ import {NgClass} from '@angular/common';
 import {RouterLink, RouterOutlet} from '@angular/router';
 import {Ripple} from 'primeng/ripple';
 import {AppPaths} from '../../../constants/path.constants';
+import {
+  ProfileCardComponent
+} from '../../../../features/users/profile/presentation/profile-card/profile-card.component';
 
 @Component({
   selector: 'app-drawer-component',
-  imports: [DrawerModule, ButtonModule, AvatarModule, NgClass, RouterLink, RouterOutlet, Ripple],
+  imports: [DrawerModule, ButtonModule, AvatarModule, NgClass, RouterLink, RouterOutlet, Ripple, ProfileCardComponent],
   standalone: true,
   templateUrl: './drawer.component.html',
   styleUrl: './drawer.component.css'
 })
 
 export class DrawerComponent {
-  
+
   @Input() visible: boolean = true;
   @Output() visibleChange = new EventEmitter<boolean>();
 

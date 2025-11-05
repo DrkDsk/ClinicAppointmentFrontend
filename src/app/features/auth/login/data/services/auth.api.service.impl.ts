@@ -14,6 +14,10 @@ export class AuthApiServiceImpl implements AuthApiService {
   constructor(private httpClient: HttpClient) {
   }
 
+  logout(): Observable<any> {
+    return this.httpClient.post('api/auth/logout', {});
+  }
+
   login(credentials: LoginCredentials): Observable<LoginResponseModel> {
     credentials.device = "samsung"
     return this.httpClient.post<LoginResponseModel>('api/auth/login', credentials)

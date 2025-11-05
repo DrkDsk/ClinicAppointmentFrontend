@@ -22,11 +22,15 @@
                class="bg-surface-300 dark:bg-surface-400 w-full px-4 py-4 rounded-lg text-surface-500 dark:text-surface-700 focus:outline-none focus:text-white focus:border focus:border-white"
                placeholder="Password">
 
+
+        <p class="text-red-300 font-bold text-lg my-4 mx-1">
+          {{ errorMessage }}
+        </p>
+
         <div class="flex flex-row mt-8">
           <button class="text-white py-4 w-full rounded-xl"
                   [ngClass]="loginForm.valid ? 'bg-primary cursor-pointer' : 'bg-gray-500/30 dark:bg-gray-500'"
-                  type="ngSubmit"
-                  [disabled]="!loginForm.valid">
+                  type="ngSubmit" [disabled]="!loginForm.valid">
             Enviar
           </button>
         </div>

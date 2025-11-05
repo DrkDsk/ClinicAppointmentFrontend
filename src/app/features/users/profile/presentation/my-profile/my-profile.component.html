@@ -1,0 +1,17 @@
+<div class="w-full flex">
+  <div
+    class="lg:w-2/3 w-11/12 mx-4 flex flex-col my-auto md:mx-auto shadow-sm
+    shadow-primary-50 rounded-sm bg-white/500">
+
+    <div class="w-full lg:w-5/6 px-4 my-24 mx-auto space-y-5 text-2xl font-semibold">
+      <p><span class="font-bold text-3xl">Nombre:</span> {{ user?.person?.name }} </p>
+      <p><span class="font-bold text-3xl">Número telefónico :</span> {{ user?.person?.phone }}</p>
+      <p><span class="font-bold text-3xl">Correo electrónico :</span> {{ user?.person?.email }}</p>
+    </div>
+
+    <div class="flex justify-end px-4 my-24">
+      <app-medium-botton [title]="'Cerrar sesíon'" (click)="logout()"></app-medium-botton>
+    </div>
+  </div>
+
+</div>

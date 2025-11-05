@@ -26,21 +26,22 @@ export const routes: Routes = [
     canActivateChild: [roleGuard],
     children: [
       {
+        path: AppPaths.profile,
+        loadComponent: () =>
+          import('./features/users/profile/presentation/my-profile/my-profile.component')
+            .then(m => m.MyProfileComponent),
+      },
+      {
         path: AppPaths.dashboard,
         loadComponent: () =>
           import('./features/dashboard/presentation/dashboard-component')
             .then(m => m.DashboardComponent)
       },
       {
-        path: AppPaths.users,
-        children: [
-          {
-            path: AppPaths.profile,
-            loadComponent: () =>
-              import('./features/users/profile/presentation/profile.component')
-                .then(m => m.ProfileComponent),
-          }
-        ]
+        path: AppPaths.profiles,
+        loadComponent: () =>
+          import('./features/users/profile/presentation/profile.component')
+            .then(m => m.ProfileComponent),
       },
       {
         path: AppPaths.doctors,

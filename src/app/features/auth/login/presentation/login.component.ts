@@ -35,11 +35,11 @@ import {AppPaths} from '../../../../core/constants/path.constants';
     InputTextModule,
     SelectModule,
     InputNumberModule,
-    NgClass,
+    NgClass
   ],
   providers: [
-    {provide: AUTH_API_SERVICE, useClass: AuthApiServiceImpl},
-    {provide: AUTH_REPOSITORY, useClass: AuthRepositoryImpl}
+    { provide: AUTH_API_SERVICE, useClass: AuthApiServiceImpl },
+    { provide: AUTH_REPOSITORY, useClass: AuthRepositoryImpl }
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
@@ -48,12 +48,13 @@ import {AppPaths} from '../../../../core/constants/path.constants';
 export class LoginComponent {
 
   constructor(@Inject(AUTH_REPOSITORY) private loginRepository: AuthRepository,
-              private tokenService: TokenService,
-              private roleService: RoleService,
-              private navigationFacade: NavigationFacade) {
+    private tokenService: TokenService,
+    private roleService: RoleService,
+    private navigationFacade: NavigationFacade) {
   }
 
   photo = "assets/images/bg1.jpg";
+  errorMessage : string | undefined | null = null
 
   loginForm = new FormGroup({
     username: new FormControl<string>('', {
@@ -76,18 +77,26 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    const credentials: LoginCredentials = {email: this.username, password: this.password}
+    const credentials: LoginCredentials = { email: this.username, password: this.password }
 
     const request = this.loginRepository.login(credentials)
 
     request.subscribe({
       next: (response) => {
+        let data= response.data;
+        let profile = data.user;
+
+        let token = data.token;
+        this.errorMessage = null;
         this.navigationFacade.navigate(AppPaths.dashboard)
-        this.tokenService.setToken(response.token);
-        const roles = response.roles.map(role => role.name);
+        this.tokenService.setToken(token);
+        const roles = profile.roles.map(role => role.name);
         this.roleService.setRoles(roles)
       },
-      error: (error) => console.error(error)
+      error: (data) => {
+        let response = data.error;
+        this.errorMessage = response.message;
+      }
     });
   }
 }

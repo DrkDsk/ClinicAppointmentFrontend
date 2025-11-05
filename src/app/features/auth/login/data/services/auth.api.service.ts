@@ -4,4 +4,6 @@ import {LoginResponseModel} from "../models/login.response.model";
 
 export interface AuthApiService {
   login(credentials: LoginCredentials): Observable<LoginResponseModel>;
+
+  logout(): Observable<any>;
 }

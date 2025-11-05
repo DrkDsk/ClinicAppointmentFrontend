@@ -3,7 +3,7 @@ export const AppPaths = {
   doctors: 'doctors',
   login: 'login',
   profile: 'profile',
+  profiles: 'profiles',
   dashboard: 'dashboard',
-  homeProfile: 'users/profile',
   createDoctor: 'doctors/create',
 }
