@@ -1,7 +1,7 @@
 <button
   (click)="callToAction()"
   [disabled]="disabled"
-  [ngClass]="{'cursor-pointer bg-primary-300 text-primary-50' : !disabled, 'bg-gray-300 text-gray-50 dark:bg-gray-700' : disabled}"
+  [ngClass]="!disabled ? 'bg-primary cursor-pointer text-surface-100 dark:text-color' : 'bg-surface-100 text-surface-300'"
   class="px-14 py-3.5 text-2xl font-bold rounded-sm">
   {{ title }}
 </button>
