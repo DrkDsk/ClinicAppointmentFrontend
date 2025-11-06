@@ -1,6 +1,6 @@
 <div class="flex flex-col">
   <div class="flex justify-end my-3">
-    <app-create-button [title]="'Registrar'" [onClick]="navigateToCreateProfile"></app-create-button>
+    <app-large-button [title]="'Registrar'" [onClick]="navigateToCreateProfile"></app-large-button>
   </div>
 
   <div class="mb-4 flex w-full">
@@ -21,14 +21,13 @@
     </div>
   </div>
 
-  <app-table [list]="doctors" [columns]="columns"/>
-
-  <app-paginator [from]="from" [to]="to" [totalRecords]="totalRecords"
-                 [listOfPages]="listOfPages" [currentPage]="currentPage"
-                 [lastPage]="lastPage"
-                 (goFirstPage)="loadDoctors(1)"
-                 (prev)="prev()"
-                 (next)="next()"
-                 (loadDoctors)="loadDoctors($event)"/>
+  <app-table [list]="doctors" [columns]="columns"
+             [from]="from" [to]="to" [totalRecords]="totalRecords"
+             [listOfPages]="listOfPages" [currentPage]="currentPage"
+             [lastPage]="lastPage"
+             (goFirstPage)="loadDoctors(1)"
+             (prev)="prev()"
+             (next)="next()"
+             (loadDoctors)="loadDoctors($event)"/>
 
 </div>

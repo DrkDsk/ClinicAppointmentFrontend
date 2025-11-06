@@ -1,5 +1,5 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {CreateButton} from '../../core/shared/presentation/buttons/create-button/create-button';
+import {LargeButton} from '../../core/shared/presentation/buttons/large-button/large-button';
 import {NavigationFacade} from '../../core/facade/navigation.facade';
 import {AppPaths} from '../../core/constants/path.constants';
 import {Button} from 'primeng/button';
@@ -9,18 +9,16 @@ import {DoctorRepositoryImpl} from '../users/doctor/data/repositories/doctor.rep
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {debounceTime, distinctUntilChanged, Subject} from 'rxjs';
 import {TableModule} from 'primeng/table';
-import {PaginatorComponent} from '../../core/shared/presentation/paginator/paginator.component';
 import {TableComponent} from '../../core/shared/presentation/table/table.component';
 
 @Component({
   selector: 'app-doctors.component',
   imports: [
-    CreateButton,
+    LargeButton,
     Button,
     FormsModule,
     TableModule,
     ReactiveFormsModule,
-    PaginatorComponent,
     TableComponent
   ],
   templateUrl: './doctors.component.html',
@@ -70,11 +68,6 @@ export class DoctorsComponent implements OnInit {
     if (this.originalDoctors.length === 0) {
       this.originalDoctors = [...this.doctors];
     }
-
-    /*this.peopleService.search(query).subscribe((response) => {
-      this.doctors = response.data
-      this.enablePagination = false
-    })*/
   }
 
   next() {
@@ -114,14 +107,11 @@ export class DoctorsComponent implements OnInit {
     this.doctorRepository.getDoctors(page, perPage).subscribe((response) => {
       this.from = response.meta?.from ?? 0;
       this.to = response.meta?.to ?? 0
-
       this.currentPage = response.meta?.current_page ?? 1;
       this.lastPage = response.meta?.last_page ?? 0;
-
-      this.listOfPages = this.getVisiblePages(this.currentPage, this.lastPage)
-
-      this.doctors = response.data;
       this.totalRecords = response.meta?.total ?? 0;
+      this.listOfPages = this.getVisiblePages(this.currentPage, this.lastPage)
+      this.doctors = response.data;
     });
   }
 
