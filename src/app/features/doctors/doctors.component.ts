@@ -6,23 +6,22 @@ import {Button} from 'primeng/button';
 import {Doctor} from '../users/doctor/domain/entities/doctor';
 import {DoctorRepository} from '../users/doctor/domain/repositories/doctor.repository';
 import {DoctorRepositoryImpl} from '../users/doctor/data/repositories/doctor.repository.impl';
-import {FloatLabel} from 'primeng/floatlabel';
-import {FormsModule} from '@angular/forms';
-import {InputText} from 'primeng/inputtext';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {debounceTime, distinctUntilChanged, Subject} from 'rxjs';
-import {PrimeTemplate} from 'primeng/api';
 import {TableModule} from 'primeng/table';
+import {PaginatorComponent} from '../../core/shared/presentation/paginator/paginator.component';
+import {TableComponent} from '../../core/shared/presentation/table/table.component';
 
 @Component({
   selector: 'app-doctors.component',
   imports: [
     CreateButton,
     Button,
-    FloatLabel,
     FormsModule,
-    InputText,
-    PrimeTemplate,
-    TableModule
+    TableModule,
+    ReactiveFormsModule,
+    PaginatorComponent,
+    TableComponent
   ],
   templateUrl: './doctors.component.html',
   styleUrl: './doctors.component.css'
@@ -34,12 +33,16 @@ export class DoctorsComponent implements OnInit {
 
   doctors: Doctor[] = [];
   originalDoctors: Doctor[] = [];
-  first = 0;
-  perPage = 10;
-  totalRecords = 0;
-  enablePagination = true;
   doctorQuery = ""
   private searchSubject = new Subject<string>();
+
+  from: number = 0;
+  to: number = 0;
+  listOfPages: number[] = [];
+  perPage = 10;
+  totalRecords = 0;
+  currentPage = 0;
+  lastPage: number = 0;
 
   ngOnInit(): void {
     this.searchSubject
@@ -60,7 +63,6 @@ export class DoctorsComponent implements OnInit {
 
   callToSearchDoctor(query: string) {
     if (!query.length) {
-      this.enablePagination = true;
       this.getDoctorPaginateService()
       return;
     }
@@ -77,54 +79,72 @@ export class DoctorsComponent implements OnInit {
 
   next() {
     const perPage = this.perPage;
-    this.first = this.first + perPage;
-    const page = this.first / perPage + 1;
+    const page = this.currentPage + 1
 
     this.getDoctorPaginateService(page, perPage);
   }
 
   prev() {
     const perPage = this.perPage;
-    this.first = this.first - perPage;
-    const page = this.first / perPage + 1;
+    const page = this.currentPage - 1
 
     this.getDoctorPaginateService(page, perPage);
   }
 
   reset() {
-    this.first = 0;
+    this.from = 0;
     this.perPage = 10;
     this.totalRecords = 0;
     this.getDoctorPaginateService()
   }
 
   isLastPage(): boolean {
-    return this.doctors ? this.first + this.perPage >= this.totalRecords : true;
+    return this.currentPage === this.lastPage;
   }
 
   isFirstPage(): boolean {
-    return this.doctors ? this.first === 0 : true;
+    return this.currentPage === 1;
   }
 
-  loadDoctors(event: any) {
-    const first = event.first;
-    const perPage = event.rows;
-    this.perPage = perPage;
-    this.first = first
-    const page = first / perPage + 1;
-
-    this.getDoctorPaginateService(page, perPage);
+  loadDoctors(page: number) {
+    this.getDoctorPaginateService(page, this.perPage);
   }
 
   getDoctorPaginateService(page?: number, perPage?: number) {
     this.doctorRepository.getDoctors(page, perPage).subscribe((response) => {
+      this.from = response.meta?.from ?? 0;
+      this.to = response.meta?.to ?? 0
+
+      this.currentPage = response.meta?.current_page ?? 1;
+      this.lastPage = response.meta?.last_page ?? 0;
+
+      this.listOfPages = this.getVisiblePages(this.currentPage, this.lastPage)
+
       this.doctors = response.data;
       this.totalRecords = response.meta?.total ?? 0;
     });
   }
 
+  getVisiblePages(currentPage: number, totalPages: number, maxVisible: number = 8): number[] {
+    const half = Math.floor(maxVisible / 2);
+
+    let start = Math.max(currentPage - half, 1);
+    let end = start + maxVisible - 1;
+
+    if (end > totalPages) {
+      end = totalPages;
+      start = Math.max(end - maxVisible + 1, 1);
+    }
+
+    return Array.from({length: end - start + 1}, (_, i) => start + i);
+  }
+
+  columns = [
+    {header: 'Nombre', cell: (d: any) => d.profile.name},
+    {header: 'Especialidad', field: 'specialty'},
+  ];
+
   navigateToCreateProfile = () => {
     this.navigationFacade.navigate(AppPaths.createDoctor);
   };
-
 }

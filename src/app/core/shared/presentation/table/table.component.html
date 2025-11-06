@@ -1,0 +1,22 @@
+<table class="table-auto md:table-fixed w-full">
+  <thead>
+  <tr class="bg-surface-300 border border-surface-100">
+    @for (col of columns; track col.header) {
+      <th class="w-1/2 py-3 border border-surface-200">{{ col.header }}</th>
+    }
+  </tr>
+  </thead>
+
+  <tbody>
+    @for (row of list; track row) {
+      <tr class="bg-surface-50">
+        @for (col of columns; track col.header) {
+          <td class="py-3 px-2 border border-surface-100">
+            {{ getCellValue(row, col) }}
+          </td>
+        }
+      </tr>
+    }
+  </tbody>
+</table>
+

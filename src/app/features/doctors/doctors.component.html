@@ -1,5 +1,5 @@
-<div>
-  <div class="flex justify-end my-3 ">
+<div class="flex flex-col">
+  <div class="flex justify-end my-3">
     <app-create-button [title]="'Registrar'" [onClick]="navigateToCreateProfile"></app-create-button>
   </div>
 
@@ -12,43 +12,23 @@
 
     <div class="w-1/2 flex justify-end">
       <div class="w-2/3">
-        <p-floatlabel variant="on">
-          <input class="w-full" pInputText id="on_label" (ngModelChange)="onQueryChange($event)"
-                 [(ngModel)]="doctorQuery" autocomplete="off"/>
-          <label for="on_label">Buscar doctor</label>
-        </p-floatlabel>
+        <input
+          (ngModelChange)="onQueryChange($event)"
+          [(ngModel)]="doctorQuery"
+          class="dark:bg-surface-50 bg-surface-0 w-full px-4 py-4 rounded-sm focus:outline-none border border-surface-100"
+          placeholder="Buscar doctor">
       </div>
     </div>
   </div>
 
-  <div>
-    <p-table
-      [value]="doctors"
-      [paginator]="enablePagination"
-      [rows]="perPage"
-      [first]="first"
-      [totalRecords]="totalRecords"
-      [lazy]="true"
-      (onLazyLoad)="loadDoctors($event)"
-      [rowsPerPageOptions]="[10, 25, 50]"
-      [showCurrentPageReport]="true"
-      [tableStyle]="{ 'min-width': '50rem' }"
-      currentPageReportTemplate="Mostrando {first} hasta {last} de {totalRecords} registros"
-      showGridlines
-      stripedRows
-    >
-      <ng-template pTemplate="header">
-        <tr>
-          <th style="width:25%">Nombre</th>
-          <th style="width:25%">Especialidad</th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-doctor>
-        <tr>
-          <td>{{ doctor.profile.name }}</td>
-          <td>{{ doctor.specialty }}</td>
-        </tr>
-      </ng-template>
-    </p-table>
-  </div>
+  <app-table [list]="doctors" [columns]="columns"/>
+
+  <app-paginator [from]="from" [to]="to" [totalRecords]="totalRecords"
+                 [listOfPages]="listOfPages" [currentPage]="currentPage"
+                 [lastPage]="lastPage"
+                 (goFirstPage)="loadDoctors(1)"
+                 (prev)="prev()"
+                 (next)="next()"
+                 (loadDoctors)="loadDoctors($event)"/>
+
 </div>
