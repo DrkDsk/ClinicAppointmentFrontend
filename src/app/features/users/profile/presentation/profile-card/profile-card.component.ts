@@ -22,7 +22,6 @@ export class ProfileCardComponent implements OnInit {
   profile: Profile | null = null
   private profileRepository: ProfileRepository = inject(ProfileRepositoryImpl);
 
-
   ngOnInit(): void {
     this.profileRepository.getProfile().subscribe(response => {
       if (response === null) {

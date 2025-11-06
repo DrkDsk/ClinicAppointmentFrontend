@@ -17,7 +17,7 @@ describe('PeopleComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create-button', () => {
+  it('should large-button', () => {
     expect(component).toBeTruthy();
   });
 });

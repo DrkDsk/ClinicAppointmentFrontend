@@ -1,0 +1,26 @@
+<div class="flex justify-center bg-surface-50 my-6 py-4">
+  <div class="px-4 text-color flex flex-row items-center space-x-2">
+    <p>Mostrando {{ from }} hasta {{ to }} de {{ totalRecords }} registros</p>
+
+    <p-button type="button" icon="pi pi-angle-double-left text-white"
+              (click)="handleGoFirstPage()" text/>
+
+    <p-button type="button" icon="pi pi-angle-left text-white"
+              (click)="handePrevPage()"
+              [disabled]="isFirstPage()" text/>
+
+    @for (page of listOfPages; track page) {
+      <button class="rounded-sm bg-surface-100 h-12 w-12 cursor-pointer text-center"
+              (click)="handleLoadDoctors(page)">
+        {{ page }}
+      </button>
+    }
+
+    <p-button type="button" icon="pi pi-angle-right text-white"
+              (click)="handleNextPage()"
+              [disabled]="isLastPage()" text/>
+
+    <p-button type="button" icon="pi pi-angle-double-right text-white"
+              (click)="handleLoadDoctors(lastPage)" text/>
+  </div>
+</div>

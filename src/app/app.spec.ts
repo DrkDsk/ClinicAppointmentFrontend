@@ -8,7 +8,7 @@ describe('App', () => {
     }).compileComponents();
   });
 
-  it('should create-button the app', () => {
+  it('should large-button the app', () => {
     const fixture = TestBed.createComponent(App);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();

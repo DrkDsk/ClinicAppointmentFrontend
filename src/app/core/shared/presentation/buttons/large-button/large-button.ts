@@ -1,12 +1,12 @@
 import {Component, Input} from '@angular/core';
 
 @Component({
-  selector: 'app-create-button',
+  selector: 'app-large-button',
   imports: [],
-  templateUrl: './create-button.html',
-  styleUrl: './create-button.css'
+  templateUrl: './large-button.html',
+  styleUrl: './large-button.css'
 })
-export class CreateButton {
+export class LargeButton {
   @Input() onClick: (() => void) | undefined;
   @Input() public title: string = "Crear";
 
