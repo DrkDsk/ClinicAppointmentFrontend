@@ -20,3 +20,14 @@
   </tbody>
 </table>
 
+@if (enablePagination) {
+  <app-paginator [from]="from" [to]="to" [totalRecords]="totalRecords"
+                 [listOfPages]="listOfPages" [currentPage]="currentPage"
+                 [lastPage]="lastPage"
+                 (goFirstPage)="handleGoFirstPage()"
+                 (prev)="handlePrevPage()"
+                 (next)="handleNextPage()"
+                 (loadDoctors)="handleLoadDoctors($event)"
+  />
+}
+
