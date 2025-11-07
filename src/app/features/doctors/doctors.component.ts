@@ -10,6 +10,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {debounceTime, distinctUntilChanged, Subject} from 'rxjs';
 import {TableModule} from 'primeng/table';
 import {TableComponent} from '../../core/shared/presentation/table/table.component';
+import {PaginatorMeta} from '../../core/shared/domain/entities/meta';
+import {PaginatorHelper} from '../../core/helpers/PaginatorHelper';
 
 @Component({
   selector: 'app-doctors.component',
@@ -33,14 +35,15 @@ export class DoctorsComponent implements OnInit {
   originalDoctors: Doctor[] = [];
   doctorQuery = ""
   private searchSubject = new Subject<string>();
-
-  from: number = 0;
-  to: number = 0;
-  listOfPages: number[] = [];
-  perPage = 10;
-  totalRecords = 0;
-  currentPage = 0;
-  lastPage: number = 0;
+  paginatorMeta: PaginatorMeta = {
+    from: 0,
+    to: 0,
+    current_page: 1,
+    last_page: 0,
+    total: 0,
+    per_page: 0,
+    pages: []
+  }
 
   ngOnInit(): void {
     this.searchSubject
@@ -71,62 +74,49 @@ export class DoctorsComponent implements OnInit {
   }
 
   next() {
-    const perPage = this.perPage;
-    const page = this.currentPage + 1
+    const perPage = this.paginatorMeta.per_page;
+    const page = this.paginatorMeta.current_page + 1
 
     this.getDoctorPaginateService(page, perPage);
   }
 
   prev() {
-    const perPage = this.perPage;
-    const page = this.currentPage - 1
+    const perPage = this.paginatorMeta.per_page;
+    const page = this.paginatorMeta.current_page - 1
 
     this.getDoctorPaginateService(page, perPage);
   }
 
   reset() {
-    this.from = 0;
-    this.perPage = 10;
-    this.totalRecords = 0;
+    this.paginatorMeta = {
+      ...this.paginatorMeta,
+      from: 0,
+      total: 0,
+      per_page: 0
+    };
     this.getDoctorPaginateService()
   }
 
   isLastPage(): boolean {
-    return this.currentPage === this.lastPage;
+    return this.paginatorMeta.current_page === this.paginatorMeta.last_page;
   }
 
   isFirstPage(): boolean {
-    return this.currentPage === 1;
+    return this.paginatorMeta.current_page === 1;
   }
 
   loadDoctors(page: number) {
-    this.getDoctorPaginateService(page, this.perPage);
+    this.getDoctorPaginateService(page, this.paginatorMeta.per_page);
   }
 
   getDoctorPaginateService(page?: number, perPage?: number) {
     this.doctorRepository.getDoctors(page, perPage).subscribe((response) => {
-      this.from = response.meta?.from ?? 0;
-      this.to = response.meta?.to ?? 0
-      this.currentPage = response.meta?.current_page ?? 1;
-      this.lastPage = response.meta?.last_page ?? 0;
-      this.totalRecords = response.meta?.total ?? 0;
-      this.listOfPages = this.getVisiblePages(this.currentPage, this.lastPage)
       this.doctors = response.data;
+      this.paginatorMeta = {
+        ...this.paginatorMeta,
+        ...PaginatorHelper.mapResponseToMeta(response)
+      }
     });
-  }
-
-  getVisiblePages(currentPage: number, totalPages: number, maxVisible: number = 8): number[] {
-    const half = Math.floor(maxVisible / 2);
-
-    let start = Math.max(currentPage - half, 1);
-    let end = start + maxVisible - 1;
-
-    if (end > totalPages) {
-      end = totalPages;
-      start = Math.max(end - maxVisible + 1, 1);
-    }
-
-    return Array.from({length: end - start + 1}, (_, i) => start + i);
   }
 
   columns = [

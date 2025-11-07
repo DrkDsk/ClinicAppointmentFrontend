@@ -18,13 +18,13 @@ export interface TableColumn<T = any> {
 export class TableComponent<T> {
 
   @Input() enablePagination: boolean = true;
-  @Input({required: true}) list: T[] = [];
+  @Input({required: true}) items: T[] = [];
   @Input({required: true}) columns: TableColumn<T>[] = [];
 
   @Output() goFirstPage = new EventEmitter<void>();
   @Output() prev = new EventEmitter<void>();
   @Output() next = new EventEmitter<void>();
-  @Output() loadDoctors = new EventEmitter<number>();
+  @Output() loadItems = new EventEmitter<number>();
 
   @Input({required: true}) public from: number = 0;
   @Input({required: true}) public to: number = 0;
@@ -46,7 +46,7 @@ export class TableComponent<T> {
   }
 
   handleLoadDoctors(page: number) {
-    this.loadDoctors.emit(page);
+    this.loadItems.emit(page);
   }
 
   getCellValue(row: any, col: any): any {
