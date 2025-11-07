@@ -17,35 +17,18 @@
     </div>
   </div>
   <div>
-    <p-table
-      [value]="people"
-      [paginator]="enablePagination"
-      [rows]="perPage"
-      [first]="first"
-      [totalRecords]="totalRecords"
-      [lazy]="true"
-      (onLazyLoad)="loadPeople($event)"
-      [rowsPerPageOptions]="[10, 25, 50]"
-      [showCurrentPageReport]="true"
-      [tableStyle]="{ 'min-width': '50rem' }"
-      currentPageReportTemplate="Mostrando {first} hasta {last} de {totalRecords} registros"
-      showGridlines
-      stripedRows
-    >
-      <ng-template pTemplate="header">
-        <tr>
-          <th style="width:25%">Nombre</th>
-          <th style="width:25%">Correo electrónico</th>
-          <th style="width:25%">Teléfono</th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-person>
-        <tr>
-          <td>{{ person.name }}</td>
-          <td>{{ person.email }}</td>
-          <td>{{ person.phone }}</td>
-        </tr>
-      </ng-template>
-    </p-table>
+
+    <app-table [columns]="columns"
+               [currentPage]="paginatorMeta.current_page"
+               [from]="paginatorMeta.from"
+               [lastPage]="paginatorMeta.last_page"
+               [listOfPages]="paginatorMeta.pages"
+               [items]="people"
+               [to]="paginatorMeta.to"
+               [totalRecords]="paginatorMeta.total"
+               (goFirstPage)="loadProfiles(1)"
+               (prev)="prev()"
+               (next)="next()"
+               (loadItems)="loadProfiles($event)"/>
   </div>
 </div>
