@@ -15,6 +15,3 @@ RUN npm install
 
 # Copia el resto del código
 COPY . .
-
-# Expone el puerto por defecto del servidor de desarrollo Angular
-EXPOSE 4200
