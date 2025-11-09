@@ -1,10 +1,8 @@
-version: '3.8'
-
 services:
-  clinic_appointments_app:
+  angular:
     build: .
     ports:
-      - "4200:4200"
+      - ${EXTERNAL_PORT}:${INTERNAL_PORT}
     volumes:
       - .:/app
       - /app/node_modules
