@@ -18,22 +18,21 @@ export const CustomPreset = definePreset(Nora, {
           900: '#173885',
         },
         surface: {
-          0: '#FFFFFF', // fondo base - muy claro
-          50: '#F8FAFC', // contenedores o secciones secundarias
-          100: '#F1F5F9', // secciones elevadas o inputs
-          200: '#E2E8F0',
-          300: '#CBD5E1',
-          400: '#94A3B8',
-          500: '#64748B', // equilibrio medio (borde/texto apagado)
-          600: '#475569',
-          700: '#334155', // texto principal / alto contraste
-          800: '#1E293B', // títulos o elementos destacados
-          900: '#0F172A',
+          50:  '#f3f6fb',  // casi blanco, sutil tono azul
+          100: '#e6edf8',  // fondo muy suave
+          200: '#c8d6ef',  // borde o fondo elevado
+          300: '#a8bfe5',  // hover o componente neutro
+          400: '#7f9cd1',  // botón secundario o highlight leve
+          500: '#4563a6',  // color base, igual que el modo oscuro
+          600: '#3d5897',  // acento principal (hover activo)
+          700: '#344a81',  // elementos activos o títulos secundarios
+          800: '#2b3b68',  // títulos o bordes fuertes
+          900: '#1e2a4b',
         },
         text: {
-          color: '#1E293B',      // gris azulado (principal)
-          secondary: '#64748B',  // gris medio (labels, placeholders),
-          error: '#FCA5A5'
+          color: '#1e2a4b',      // Texto principal — casi negro con un toque azul
+          secondary: '#344a81',  // Texto secundario — gris azulado, más suave
+          error: '#de5959'       // Rojo de error — visible pero no chillón
         },
       },
       dark: {
@@ -50,21 +49,22 @@ export const CustomPreset = definePreset(Nora, {
           900: '#172554',
         },
         surface: {
-          0: '#122644',
-          50: '#1E293B',
-          100: '#334155',
-          200: '#3E4C63',
-          300: '#495871',
-          400: '#566580',
-          500: '#64748B',
-          600: '#7C8BA0',
-          700: '#9CA3AF',
-          800: '#CBD5E1',
-          900: '#F1F5F9',
+          0:   '#0C1224', // casi negro con tinte azul
+          50:  '#121A33',
+          100: '#1A2547',
+          200: '#22305C',
+          300: '#2B3B72',
+          400: '#35478A',
+          500: '#3F54A0', // base media (similar a #4563A6)
+          600: '#5B72C0',
+          700: '#768FDD',
+          800: '#9BB0F3',
+          900: '#C4D1FF',
         },
         text: {
-          color: '#F1F5F9',      // blanco suave
-          secondary: '#94A3B8',  // gris claro
+          color: '#e6edf8',      // Texto principal — casi blanco, legible
+          secondary: '#a8bfe5',  // Texto secundario — gris azulado suave
+          error: '#ef5350'       // Rojo claro de error — destaca sin romper el esquema
         },
       },
     },
