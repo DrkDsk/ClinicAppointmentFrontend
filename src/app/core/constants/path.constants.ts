@@ -5,5 +5,7 @@ export const AppPaths = {
   profile: 'profile',
   profiles: 'profiles',
   dashboard: 'dashboard',
+  appointments: 'appointments',
+  createAppointment: 'appointments/create',
   createDoctor: 'doctors/create',
 }
