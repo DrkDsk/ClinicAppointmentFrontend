@@ -15,19 +15,4 @@ export class PaginatorHelper {
 
     return Array.from({length: end - start + 1}, (_, i) => start + i);
   }
-
-  static mapResponseToMeta(responseMeta: any): PaginatorMeta {
-    const current = responseMeta?.current_page ?? 1;
-    const last = responseMeta?.last_page ?? 0;
-
-    return {
-      from: responseMeta?.from ?? 0,
-      to: responseMeta?.to ?? 0,
-      current_page: current,
-      last_page: last,
-      total: responseMeta?.total ?? 0,
-      per_page: responseMeta?.per_page ?? 0,
-      pages: PaginatorHelper.getVisiblePages(current, last)
-    };
-  }
 }

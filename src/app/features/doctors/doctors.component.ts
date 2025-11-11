@@ -6,9 +6,8 @@ import {Button} from 'primeng/button';
 import {Doctor} from '../users/doctor/domain/entities/doctor';
 import {DoctorRepository} from '../users/doctor/domain/repositories/doctor.repository';
 import {DoctorRepositoryImpl} from '../users/doctor/data/repositories/doctor.repository.impl';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {debounceTime, distinctUntilChanged, Subject} from 'rxjs';
-import {TableModule} from 'primeng/table';
+import {FormsModule} from '@angular/forms';
 import {TableComponent} from '../../core/shared/presentation/table/table.component';
 import {PaginatorMeta} from '../../core/shared/domain/entities/meta';
 import {PaginatorHelper} from '../../core/helpers/PaginatorHelper';
@@ -19,8 +18,6 @@ import {PaginatorHelper} from '../../core/helpers/PaginatorHelper';
     LargeButton,
     Button,
     FormsModule,
-    TableModule,
-    ReactiveFormsModule,
     TableComponent
   ],
   templateUrl: './doctors.component.html',
@@ -112,9 +109,19 @@ export class DoctorsComponent implements OnInit {
   getDoctorPaginateService(page?: number, perPage?: number) {
     this.doctorRepository.getDoctors(page, perPage).subscribe((response) => {
       this.doctors = response.data;
+      const responseMeta = response?.meta;
+      const current = responseMeta?.current_page ?? 1;
+      const last = responseMeta?.last_page ?? 0
+
       this.paginatorMeta = {
         ...this.paginatorMeta,
-        ...PaginatorHelper.mapResponseToMeta(response)
+        from: responseMeta?.from ?? 0,
+        to: responseMeta?.to ?? 0,
+        current_page: current,
+        last_page: responseMeta?.last_page ?? 0,
+        total: responseMeta?.total ?? 0,
+        per_page: responseMeta?.per_page ?? 0,
+        pages: PaginatorHelper.getVisiblePages(current, last)
       }
     });
   }
