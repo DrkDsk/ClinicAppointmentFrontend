@@ -1,16 +1,16 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {LargeButton} from '../../core/shared/presentation/buttons/large-button/large-button';
-import {NavigationFacade} from '../../core/facade/navigation.facade';
-import {AppPaths} from '../../core/constants/path.constants';
+import {LargeButton} from '../../../../../core/shared/presentation/buttons/large-button/large-button';
+import {NavigationFacade} from '../../../../../core/facade/navigation.facade';
+import {AppPaths} from '../../../../../core/constants/path.constants';
 import {Button} from 'primeng/button';
-import {Doctor} from '../users/doctor/domain/entities/doctor';
-import {DoctorRepository} from '../users/doctor/domain/repositories/doctor.repository';
-import {DoctorRepositoryImpl} from '../users/doctor/data/repositories/doctor.repository.impl';
+import {Doctor} from '../../domain/entities/doctor';
+import {DoctorRepository} from '../../domain/repositories/doctor.repository';
+import {DoctorRepositoryImpl} from '../../data/repositories/doctor.repository.impl';
 import {debounceTime, distinctUntilChanged, Subject} from 'rxjs';
 import {FormsModule} from '@angular/forms';
-import {TableComponent} from '../../core/shared/presentation/table/table.component';
-import {PaginatorMeta} from '../../core/shared/domain/entities/meta';
-import {PaginatorHelper} from '../../core/helpers/PaginatorHelper';
+import {TableComponent} from '../../../../../core/shared/presentation/table/table.component';
+import {PaginatorMeta} from '../../../../../core/shared/domain/entities/meta';
+import {PaginatorHelper} from '../../../../../core/helpers/PaginatorHelper';
 
 @Component({
   selector: 'app-doctors.component',

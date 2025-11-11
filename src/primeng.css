@@ -1,0 +1,37 @@
+@media (prefers-color-scheme: dark) {
+
+  .p-datepicker-panel {
+    background-color: #1e1f26 !important;
+    border: 1px solid #444;
+  }
+
+  .p-datepicker-panel-background {
+    background: linear-gradient(145deg, #1f2230, #292b3a) !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+
+  .p-datepicker-header {
+    background: linear-gradient(145deg, #1f2230, #292b3a) !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+
+  .p-datepicker-dropdown {
+    color: #e6edf8 !important;
+  }
+
+  .p-inputtext {
+    color: #e6edf8 !important;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .p-datepicker-panel {
+    background-color: #ffffff !important;
+    border: 1px solid #ccc;
+  }
+
+  .p-datepicker-panel-background {
+    background: linear-gradient(145deg, #f9f9f9, #f1f1f1) !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+}
