@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-large-button',
@@ -7,12 +7,11 @@ import {Component, Input} from '@angular/core';
   styleUrl: './large-button.css'
 })
 export class LargeButton {
-  @Input() onClick: (() => void) | undefined;
+
+  @Output() onClick = new EventEmitter<void>();
   @Input() public title: string = "Crear";
 
-  callToAction() {
-    if (this.onClick) {
-      this.onClick();
-    }
+  handleClick() {
+    this.onClick.emit();
   }
 }
