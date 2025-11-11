@@ -1,5 +1,5 @@
 <div
-  class="flex justify-center my-auto md:mx-auto shadow-sm shadow-surface-100 rounded-sm bg-surface-50">
+  class="flex justify-center my-auto md:mx-auto shadow-sm shadow-surface-100 rounded-sm bg-surface-100">
 
   <div class="flex justify-center w-11/12 my-5">
     <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()" class="w-full space-y-4 space-x-4">
@@ -14,26 +14,23 @@
             appendTo="body"
             class="w-full"
           ></p-datepicker>
-          <label for="calendar">Fecha de nacimiento</label>
+          <label for="calendar" class="text-color-label">Fecha de nacimiento</label>
         </p-floatlabel>
       </div>
 
       <div class="w-1/2 mx-auto">
-        <div class="grid grid-cols-1 gap-8">
-
-          <p-floatlabel variant="in">
-            <p-datepicker
-              formControlName="date"
-              dateFormat="dd.mm.yy"
-              [showIcon]="true"
-              inputId="buttondisplay"
-              id="calendar"
-              appendTo="body"
-              class="w-full"
-            ></p-datepicker>
-            <label for="calendar">Fecha de nacimiento</label>
-          </p-floatlabel>
-        </div>
+        <p-floatlabel variant="in">
+          <p-datepicker
+            formControlName="date"
+            dateFormat="dd.mm.yy"
+            [showIcon]="true"
+            inputId="buttondisplay"
+            id="calendar"
+            appendTo="body"
+            class="w-full"
+          ></p-datepicker>
+          <label for="calendar" class="text-color-label">Fecha de nacimiento</label>
+        </p-floatlabel>
       </div>
     </form>
   </div>
