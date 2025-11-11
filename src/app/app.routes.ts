@@ -46,12 +46,23 @@ export const routes: Routes = [
       {
         path: AppPaths.doctors,
         loadComponent: () =>
-          import("./features/doctors/doctors.component").then(m => m.DoctorsComponent),
+          import("./features/users/doctor/presentation/index/doctors.component").then(m => m.DoctorsComponent),
       },
+      {
+        path: AppPaths.appointments,
+        loadComponent: () =>
+          import('./features/appointments/presentation/index/appointments.component').then(m => m.AppointmentsComponent),
+      },
+      {
+        path: AppPaths.createAppointment,
+        loadComponent: () =>
+          import('./features/appointments/presentation/create/create-appointment.component').then(m => m.CreateAppointmentComponent),
+      }
+      ,
       {
         path: AppPaths.createDoctor,
         loadComponent: () =>
-          import('./features/users/doctor/presentation/create-doctor.component/create-doctor.component')
+          import('./features/users/doctor/presentation/create/create-doctor.component')
             .then(m => m.CreateDoctorComponent),
 
       }
