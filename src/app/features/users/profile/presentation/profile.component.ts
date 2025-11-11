@@ -1,9 +1,4 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {TableModule} from 'primeng/table';
-import {ButtonModule} from 'primeng/button';
-import {FormsModule} from '@angular/forms';
-import {FloatLabel} from 'primeng/floatlabel';
-import {InputText} from 'primeng/inputtext';
 import {debounceTime, distinctUntilChanged, Subject} from 'rxjs';
 import {Profile} from '../domain/entities/profile';
 import {ProfileRepository} from '../domain/repositories/profile.repository';
@@ -11,14 +6,18 @@ import {ProfileRepositoryImpl} from '../data/repositories/profile.repository.imp
 import {TableComponent} from '../../../../core/shared/presentation/table/table.component';
 import {PaginatorMeta} from '../../../../core/shared/domain/entities/meta';
 import {PaginatorHelper} from '../../../../core/helpers/PaginatorHelper';
+import {FormsModule} from '@angular/forms';
+import {Button} from 'primeng/button';
 
 @Component({
-  selector: 'app-people-component',
+  selector: 'app-profile.component',
   imports: [
-    TableModule, ButtonModule, FormsModule, FloatLabel, InputText, TableComponent
+    Button,
+    FormsModule,
+    TableComponent
   ],
   templateUrl: './profile.component.html',
-  styleUrl: './profile.component.css'
+  styleUrl: './profile.component.css',
 })
 export class ProfileComponent implements OnInit {
 
@@ -117,12 +116,23 @@ export class ProfileComponent implements OnInit {
   }
 
   getProfilePaginateService(page?: number, perPage?: number) {
-    this.profileRepository.getProfilesPaginate(page, perPage).subscribe((response) => {
+    this.profileRepository.getProfilesPaginate(page, perPage)
+      .subscribe((response) => {
       this.people = response.data;
+
+      const responseMeta = response?.meta;
+      const current = responseMeta?.current_page ?? 1;
+      const last = responseMeta?.last_page ?? 0
 
       this.paginatorMeta = {
         ...this.paginatorMeta,
-        ...PaginatorHelper.mapResponseToMeta(response)
+        from: responseMeta?.from ?? 0,
+        to: responseMeta?.to ?? 0,
+        current_page: current,
+        last_page: responseMeta?.last_page ?? 0,
+        total: responseMeta?.total ?? 0,
+        per_page: responseMeta?.per_page ?? 0,
+        pages: PaginatorHelper.getVisiblePages(current, last)
       }
     });
   }

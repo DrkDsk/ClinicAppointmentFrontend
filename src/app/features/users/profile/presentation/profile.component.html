@@ -8,11 +8,11 @@
 
     <div class="w-1/2 flex justify-end">
       <div class="w-2/3">
-        <p-floatlabel variant="on">
-          <input class="w-full" pInputText id="on_label" (ngModelChange)="onQueryChange($event)"
-                 [(ngModel)]="peopleQuery" autocomplete="off"/>
-          <label for="on_label">Buscar perfil</label>
-        </p-floatlabel>
+        <input
+          (ngModelChange)="onQueryChange($event)"
+          [(ngModel)]="peopleQuery"
+          class="dark:bg-surface-50 bg-surface-0 w-full px-4 py-4 rounded-sm focus:outline-none border border-surface-100"
+          placeholder="Buscar perfil">
       </div>
     </div>
   </div>
