@@ -1,7 +1,7 @@
 <div class="w-full flex h-screen bg-surface-200">
   <div
     class="h-10/12 lg:w-2/3 w-11/12 mx-4 flex flex-row my-auto md:mx-auto shadow-sm
-    shadow-surface-100 rounded-2xl bg-surface-50">
+    shadow-surface-100 rounded-sm bg-surface-50">
 
     <img [src]="photo" class="object-cover w-0 md:w-1/2 h-full rounded-tl-2xl rounded-bl-2xl" alt=""/>
 
@@ -29,7 +29,7 @@
         </p>
 
         <div class="flex flex-row mt-8">
-          <button class="py-4 w-full rounded-xl"
+          <button class="py-4 w-full rounded-sm"
                   [ngClass]="loginForm.valid ? 'bg-primary cursor-pointer text-surface-100 dark:text-color' : 'bg-surface-100'"
                   type="ngSubmit" [disabled]="!loginForm.valid">
             Enviar
