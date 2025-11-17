@@ -1,39 +1,77 @@
 <div
-  class="flex justify-center my-auto md:mx-auto shadow-sm shadow-surface-100 rounded-sm bg-surface-100">
+  class="flex my-auto mx-auto shadow-sm shadow-surface-100 rounded-sm bg-surface-100">
 
-  <div class="flex justify-center w-11/12 my-5">
-    <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()" class="w-full space-y-4 space-x-4">
-      <div class="w-1/2 mx-auto">
-        <p-floatlabel variant="in">
-          <p-datepicker
-            formControlName="date"
-            dateFormat="dd.mm.yy"
-            [showIcon]="true"
-            inputId="buttondisplay"
-            id="calendar"
-            appendTo="body"
-            class="w-full"
-          ></p-datepicker>
-          <label for="calendar" class="text-color-label">Fecha de nacimiento</label>
-        </p-floatlabel>
-      </div>
+  <p-stepper [value]="1" class="w-full">
+    <p-step-list>
+      <p-step [value]="1">Seleccionar Odontólogo</p-step>
+      <p-step [value]="2" [disabled]="doctorForm.invalid">Seleccionar fecha</p-step>
+    </p-step-list>
+    <p-step-panels>
+      <p-step-panel [value]="1">
+        <ng-template pTemplate="content" let-activateCallback="activateCallback">
 
-      <div class="w-1/2 mx-auto">
-        <p-floatlabel variant="in">
-          <p-datepicker
-            formControlName="date"
-            dateFormat="dd.mm.yy"
-            [showIcon]="true"
-            inputId="buttondisplay"
-            id="calendar"
-            appendTo="body"
-            class="w-full"
-          ></p-datepicker>
-          <label for="calendar" class="text-color-label">Fecha de nacimiento</label>
-        </p-floatlabel>
-      </div>
-    </form>
-  </div>
+          <form [formGroup]="appointmentForm">
+            <div class="w-3/4 mx-auto">
+              <div class="grid grid-cols-3 gap-8">
+
+                @for (doctor of doctors; track doctor.id) {
+                  <div [ngClass]="(selectedDoctorId == doctor.id.toString()) ? 'bg-surface-400 text-white dark:text-color' : 'bg-surface-0'" (click)="setDoctorId(doctor)" class="flex flex-col justify-between h-64 w-full p-4 rounded-sm focus:outline-none border border-surface-100">
+                    <p class="text-2xl">{{doctor.profile.name}}</p>
+                    <p class="text-end text-lg">{{doctor.specialty}}</p>
+                  </div>
+                }
+              </div>
+            </div>
+          </form>
+
+          <app-paginator [currentPage]="paginatorMeta.current_page"
+                         [from]="paginatorMeta.from"
+                         [lastPage]="paginatorMeta.last_page"
+                         [listOfPages]="paginatorMeta.pages" [to]="paginatorMeta.to"
+                         [totalRecords]="paginatorMeta.total"
+                         (goFirstPage)="loadDoctors(1)"
+                         (prev)="prev()"
+                         (next)="next()"
+                         (loadItems)="loadDoctors($event)"/>
+
+          <div class="flex pt-6 justify-end">
+            <app-medium-botton [disabled]="doctorForm.invalid"
+                               (click)="activateCallback(2)"
+                               [title]="'Continuar'">
+            </app-medium-botton>
+          </div>
+        </ng-template>
+      </p-step-panel>
+
+      <p-step-panel [value]="2">
+        <ng-template pTemplate="content" let-activateCallback="activateCallback">
+          <div class="flex flex-row justify-center w-11/12 my-5 mx-auto">
+            <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()" class="w-full space-y-4 space-x-4">
+
+              <div class="w-1/2 mx-auto">
+                <p-floatlabel variant="in">
+                  <p-datepicker
+                    formControlName="date"
+                    dateFormat="dd.mm.yy"
+                    [showIcon]="true"
+                    inputId="buttondisplay"
+                    (onSelect)="getAvailableAppointments($event)"
+                    id="calendar"
+                    appendTo="body"
+                    class="w-full"
+                  ></p-datepicker>
+                  <label for="calendar" class="text-color-label">Fecha de cita</label>
+                </p-floatlabel>
+              </div>
+            </form>
+          </div>
+        </ng-template>
+      </p-step-panel>
+
+    </p-step-panels>
+  </p-stepper>
+
+
 
 
 </div>
