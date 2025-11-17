@@ -14,7 +14,7 @@ export class PaginatorComponent {
   @Output() goFirstPage = new EventEmitter<void>();
   @Output() prev = new EventEmitter<void>();
   @Output() next = new EventEmitter<void>();
-  @Output() loadDoctors = new EventEmitter<number>();
+  @Output() loadItems = new EventEmitter<number>();
 
   @Input({required: true}) public from: number = 0;
   @Input({required: true}) public to: number = 0;
@@ -44,6 +44,6 @@ export class PaginatorComponent {
   }
 
   handleLoadDoctors(page: number) {
-    this.loadDoctors.emit(page);
+    this.loadItems.emit(page);
   }
 }
