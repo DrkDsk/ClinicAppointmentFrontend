@@ -206,7 +206,17 @@ export class CreateAppointmentComponent implements OnInit {
   }
 
   onSubmit() {
+    const date = this.appointmentForm.get('date')?.value;
+    const formattedDate = date?.toISOString().split('T')[0];
 
+    const body = {
+      doctor_id: this.selectedDoctor?.id.toString(),
+      date: `${formattedDate} ${this.selectedTime}`,
+      note: this.appointmentNote
+    }
+
+    console.log({
+      body
+    })
   }
-
 }
