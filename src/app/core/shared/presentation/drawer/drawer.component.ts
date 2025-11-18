@@ -33,8 +33,5 @@ export class DrawerComponent {
     this.visibleChange.emit(this.visible);
   }
 
-  onAttach(e: any) {
-  }
-
   protected readonly AppPaths = AppPaths;
 }

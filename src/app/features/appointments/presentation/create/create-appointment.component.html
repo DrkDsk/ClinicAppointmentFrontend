@@ -89,7 +89,7 @@
                   @for (time of availableAppointments; track time) {
                     <div (click)="setAppointmentTime(time)"
                          [ngClass]="(selectedTime == time) ? 'bg-surface-500 text-white dark:text-color' : 'bg-surface-0'"
-                         class="cursor-pointer rounded-sm my-auto mx-auto p-2">
+                         class="cursor-pointer rounded-sm my-auto mx-auto p-2 space-x-2 items-center">
                       <span class="pi pi-calendar-clock"></span>
                       <label>{{ time }} hrs</label>
                     </div>

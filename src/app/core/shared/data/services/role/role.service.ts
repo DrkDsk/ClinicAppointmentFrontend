@@ -17,9 +17,4 @@ export class RoleService {
   public getRoles(): string[] {
     return this.roles.length ? this.roles : JSON.parse(sessionStorage.getItem('roles') ?? '[]');
   }
-
-  public hasRole(role: string) {
-    return this.getRoles().includes(role);
-  }
-
 }

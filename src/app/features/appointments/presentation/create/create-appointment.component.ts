@@ -15,7 +15,6 @@ import {NgClass} from '@angular/common';
 import {AppointmentRepositoryImpl} from '../../data/repositories/appointment.repository.impl';
 import {AppointmentRepository} from '../../domain/repositories/appointment.repository';
 import {Divider} from 'primeng/divider';
-import {Card} from 'primeng/card';
 
 @Component({
   selector: 'app-create-appointment.component',
@@ -33,7 +32,6 @@ import {Card} from 'primeng/card';
     Stepper,
     NgClass,
     Divider,
-    Card,
   ],
   templateUrl: './create-appointment.component.html',
   styleUrl: './create-appointment.component.css'

@@ -20,13 +20,7 @@ export class AuthRepositoryImpl implements AuthRepository {
     return request.pipe(
       map(response => response),
       catchError((err, caught) => {
-
-        console.log({
-          error: err
-        })
-
         return throwError(() => err);
-
       })
     );
   }
