@@ -12,6 +12,10 @@ import {MediumBotton} from '../../../../core/shared/presentation/buttons/medium-
 import {PrimeTemplate} from 'primeng/api';
 import {Step, StepList, StepPanel, StepPanels, Stepper} from 'primeng/stepper';
 import {NgClass} from '@angular/common';
+import {AppointmentRepositoryImpl} from '../../data/repositories/appointment.repository.impl';
+import {AppointmentRepository} from '../../domain/repositories/appointment.repository';
+import {Divider} from 'primeng/divider';
+import {Card} from 'primeng/card';
 
 @Component({
   selector: 'app-create-appointment.component',
@@ -28,16 +32,23 @@ import {NgClass} from '@angular/common';
     StepPanels,
     Stepper,
     NgClass,
+    Divider,
+    Card,
   ],
   templateUrl: './create-appointment.component.html',
   styleUrl: './create-appointment.component.css'
 })
-export class CreateAppointmentComponent implements OnInit{
 
-  private doctorRepository : DoctorRepository = inject(DoctorRepositoryImpl)
+export class CreateAppointmentComponent implements OnInit {
+
+  private doctorRepository: DoctorRepository = inject(DoctorRepositoryImpl)
+  private appointmentRepository: AppointmentRepository = inject(AppointmentRepositoryImpl)
 
   doctors: Doctor[] = [];
-  selectedDoctorId: String | null = null;
+  availableAppointments: string[] = [];
+  selectedDoctor: Doctor | null = null;
+  selectedTime: string | null = null
+  bannerMessage: string = ""
   paginatorMeta: PaginatorMeta = {
     from: 0,
     to: 0,
@@ -55,24 +66,45 @@ export class CreateAppointmentComponent implements OnInit{
     })
   });
 
-  appointmentForm : FormGroup = new FormGroup({
+
+  appointmentForm: FormGroup = new FormGroup({
     doctorForm: this.doctorForm,
+    patientName: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required]
+    }),
+    middleName: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required]
+    }),
+    note: new FormControl('', {
+      nonNullable: false,
+    }),
     date: new FormControl<Date | null>(null, {
       nonNullable: true,
       validators: [Validators.required]
     }),
   });
 
+  ngOnInit(): void {
+    this.getDoctorPaginateService(this.paginatorMeta.current_page, this.paginatorMeta.per_page)
+  }
+
   setDoctorId(doctor: Doctor) {
     const doctorId = doctor.id.toString();
     this.doctorForm.setValue({
       doctorId: doctorId
     })
-    this.selectedDoctorId = doctorId
+    this.selectedDoctor = doctor
   }
 
-  ngOnInit(): void {
-      this.getDoctorPaginateService(this.paginatorMeta.current_page, this.paginatorMeta.per_page)
+  onDoctorNext(next: Function) {
+    this.appointmentForm.get('date')?.reset();
+    this.selectedTime = null
+    this.availableAppointments = []
+    this.bannerMessage = ""
+
+    next();
   }
 
   next() {
@@ -114,13 +146,63 @@ export class CreateAppointmentComponent implements OnInit{
   }
 
   getAvailableAppointments(date: Date) {
-    const doctorId = this.selectedDoctorId;
+    const doctorId = this.selectedDoctor?.id.toString();
+
+    if (!doctorId) return;
+
     const dateFormatted = date.toISOString().split('T')[0];
 
-    console.log({
-      doctorId,
-      dateFormatted
+    this.appointmentRepository.getAvailableDates(doctorId, dateFormatted).subscribe((response) => {
+
+      const data = response.data
+
+      if (!data || data.length == 0) {
+        this.bannerMessage = response.message
+        this.availableAppointments = []
+        this.selectedTime = null
+      } else {
+        this.availableAppointments = data
+        this.bannerMessage = ""
+      }
     })
+  }
+
+  setAppointmentTime(time: string) {
+    this.selectedTime = time
+    const date = new Date(this.appointmentForm.get('date')?.value)
+    const timeFormatted = time.split(':')
+    date.setHours(parseInt(timeFormatted[0]))
+    date.setMinutes(parseInt(timeFormatted[1]))
+
+    this.appointmentForm.patchValue({
+      date: date
+    })
+  }
+
+  get selectedAppointmentDate(): string {
+
+    const date = this.appointmentForm.get('date')?.value
+
+    const formattedDate = new Intl.DateTimeFormat('es-ES', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    }).format(date);
+
+    return formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1)
+  }
+
+  get patientName(): string {
+
+    const name = this.appointmentForm.get('patientName')?.value
+    const middleName = this.appointmentForm.get('middleName')?.value
+
+    return `${name} ${middleName}`
+  }
+
+  get appointmentNote(): string {
+    return this.appointmentForm.get('note')?.value ?? ""
   }
 
   onSubmit() {
