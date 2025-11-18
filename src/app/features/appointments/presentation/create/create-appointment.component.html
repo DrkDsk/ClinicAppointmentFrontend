@@ -55,64 +55,68 @@
       <p-step-panel [value]="2">
         <ng-template pTemplate="content" let-activateCallback="activateCallback">
           <div class="flex flex-row justify-center w-11/12 my-5 mx-auto">
-            <form [formGroup]="appointmentForm" class="w-full space-y-4 space-x-4">
 
-              <div class="w-1/2 mx-auto space-y-2">
+            <div class="w-1/2 space-y-2">
 
-                <div class="flex">
+              <form [formGroup]="patientForm" class="grid grid-cols-2 gap-2">
+                <input id="patient_name" formControlName="name"
+                       [readOnly]="firstNameIsFilled"
+                       [disabled]="firstNameIsFilled"
+                       [ngClass]="{'bg-gray-500/20': firstNameIsFilled, 'bg-surface-0 dark:bg-surface-50' : !firstNameIsFilled}"
+                       class="placeholder:text-gray-400 w-full px-4 py-4 rounded-sm focus:outline-none border border-surface-100"
+                       placeholder="Nombre del paciente">
 
-                  <input id="patient_name" formControlName="patientName"
-                         class="dark:bg-surface-50 bg-surface-0 placeholder:text-gray-400 w-full px-4 py-4 rounded-sm focus:outline-none border border-surface-100"
-                         placeholder="Nombre del paciente">
+                <input id="patient_name" formControlName="lastName"
+                       [readOnly]="lastNameIsFilled"
+                       [disabled]="lastNameIsFilled"
+                       [ngClass]="{'bg-gray-500/20': lastNameIsFilled, 'bg-surface-0 dark:bg-surface-50' : !lastNameIsFilled}"
+                       class="placeholder:text-gray-400 w-full px-4 py-4 rounded-sm focus:outline-none border border-surface-100"
+                       placeholder="Apellidos">
+              </form>
 
-                  <input id="patient_name" formControlName="middleName"
-                         class="dark:bg-surface-50 bg-surface-0 placeholder:text-gray-400 w-full px-4 py-4 rounded-sm focus:outline-none border border-surface-100"
-                         placeholder="Apellidos">
-                </div>
+              <form [formGroup]="appointmentForm" class="space-y-2">
+                <p-floatlabel variant="in">
+                  <p-datepicker
+                    formControlName="date"
+                    dateFormat="dd.mm.yy"
+                    [showIcon]="true"
+                    inputId="buttondisplay"
+                    (onSelect)="getAvailableAppointments($event)"
+                    id="calendar"
+                    appendTo="body"
+                    class="w-full"
+                  ></p-datepicker>
+                  <label for="calendar" class="text-color-label">Fecha de cita</label>
+                </p-floatlabel>
 
-                <div class="space-y-2">
-                  <p-floatlabel variant="in">
-                    <p-datepicker
-                      formControlName="date"
-                      dateFormat="dd.mm.yy"
-                      [showIcon]="true"
-                      inputId="buttondisplay"
-                      (onSelect)="getAvailableAppointments($event)"
-                      id="calendar"
-                      appendTo="body"
-                      class="w-full"
-                    ></p-datepicker>
-                    <label for="calendar" class="text-color-label">Fecha de cita</label>
-                  </p-floatlabel>
+                @if (availableAppointments.length) {
+                  <div class="grid grid-cols-5 gap-2">
+                    @for (time of availableAppointments; track time) {
+                      <div (click)="setAppointmentTime(time)"
+                           [ngClass]="(selectedTime == time) ? 'bg-surface-500 text-white dark:text-color' : 'bg-surface-0'"
+                           class="cursor-pointer rounded-sm my-auto mx-auto p-2 space-x-2 items-center">
+                        <span class="pi pi-calendar-clock"></span>
+                        <label>{{ time }} hrs</label>
+                      </div>
+                    }
+                  </div>
+                }
 
-                  @if (availableAppointments.length) {
-                    <div class="grid grid-cols-5 gap-2">
-                      @for (time of availableAppointments; track time) {
-                        <div (click)="setAppointmentTime(time)"
-                             [ngClass]="(selectedTime == time) ? 'bg-surface-500 text-white dark:text-color' : 'bg-surface-0'"
-                             class="cursor-pointer rounded-sm my-auto mx-auto p-2 space-x-2 items-center">
-                          <span class="pi pi-calendar-clock"></span>
-                          <label>{{ time }} hrs</label>
-                        </div>
-                      }
-                    </div>
-                  }
-
-                  @if (bannerMessage.length) {
+                @if (bannerMessage.length) {
+                  <div class="my-2">
                     <label class="text-error-300">
                       {{ bannerMessage }}
                     </label>
-                  }
-                </div>
+                  </div>
+                }
 
                 <textarea formControlName="note"
                           class="dark:bg-surface-50 bg-surface-0 placeholder:text-gray-400 w-full px-4 py-4 rounded-sm focus:outline-none border border-surface-100"
                           placeholder="Nota (Opcional)">
 
                 </textarea>
-
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
 
           <div class="flex p-6 justify-end">
