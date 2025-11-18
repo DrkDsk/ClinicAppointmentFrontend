@@ -15,6 +15,9 @@ import {NgClass} from '@angular/common';
 import {AppointmentRepositoryImpl} from '../../data/repositories/appointment.repository.impl';
 import {AppointmentRepository} from '../../domain/repositories/appointment.repository';
 import {Divider} from 'primeng/divider';
+import {ProfileRepository} from '../../../users/profile/domain/repositories/profile.repository';
+import {ProfileRepositoryImpl} from '../../../users/profile/data/repositories/profile.repository.impl';
+import {Profile} from '../../../users/profile/domain/entities/profile';
 
 @Component({
   selector: 'app-create-appointment.component',
@@ -41,7 +44,9 @@ export class CreateAppointmentComponent implements OnInit {
 
   private doctorRepository: DoctorRepository = inject(DoctorRepositoryImpl)
   private appointmentRepository: AppointmentRepository = inject(AppointmentRepositoryImpl)
+  private profileRepository: ProfileRepository = inject(ProfileRepositoryImpl)
 
+  patientProfile: Profile | null | undefined = null
   doctors: Doctor[] = [];
   availableAppointments: string[] = [];
   selectedDoctor: Doctor | null = null;
@@ -64,7 +69,6 @@ export class CreateAppointmentComponent implements OnInit {
     })
   });
 
-
   appointmentForm: FormGroup = new FormGroup({
     doctorForm: this.doctorForm,
     patientName: new FormControl('', {
@@ -86,11 +90,12 @@ export class CreateAppointmentComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDoctorPaginateService(this.paginatorMeta.current_page, this.paginatorMeta.per_page)
+    this.loadPatientProfile()
   }
 
   setDoctorId(doctor: Doctor) {
     const doctorId = doctor.id.toString();
-    this.doctorForm.setValue({
+    this.doctorForm.patchValue({
       doctorId: doctorId
     })
     this.selectedDoctor = doctor
@@ -121,6 +126,21 @@ export class CreateAppointmentComponent implements OnInit {
 
   loadDoctors(page: number) {
     this.getDoctorPaginateService(page, this.paginatorMeta.per_page);
+  }
+
+  loadPatientProfile() {
+    this.profileRepository.getProfile().subscribe((response) => {
+      const profile = response?.person;
+
+      if (profile) {
+        this.patientProfile = response?.person;
+        this.appointmentForm.patchValue({
+          'patientName': profile.name
+        })
+      } else {
+        this.patientProfile = null;
+      }
+    })
   }
 
   getDoctorPaginateService(page?: number, perPage?: number) {

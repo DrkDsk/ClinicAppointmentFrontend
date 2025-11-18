@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {ProfileRepository} from '../../domain/repositories/profile.repository';
 import {ProfileRepositoryImpl} from '../../data/repositories/profile.repository.impl';
 import {User} from '../../../../dashboard/domain/entities/user';
@@ -19,7 +19,8 @@ import {AppPaths} from '../../../../../core/constants/path.constants';
   templateUrl: './my-profile.component.html',
   styleUrl: './my-profile.component.css'
 })
-export class MyProfileComponent {
+
+export class MyProfileComponent implements OnInit {
 
   user: User | null = null;
   private profileRepository: ProfileRepository = inject(ProfileRepositoryImpl);
@@ -27,7 +28,7 @@ export class MyProfileComponent {
   private tokenService: TokenService = inject(TokenService)
   private router = inject(Router);
 
-  constructor() {
+  ngOnInit(): void {
     this.profileRepository.getProfile().subscribe(user => {
       if (user === null) {
         return;

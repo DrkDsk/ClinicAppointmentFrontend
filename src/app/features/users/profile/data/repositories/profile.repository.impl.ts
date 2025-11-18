@@ -1,6 +1,6 @@
-import {map, Observable} from "rxjs";
+import {catchError, map, Observable, throwError} from "rxjs";
 import {ProfileRepository} from '../../domain/repositories/profile.repository';
-import {inject, Inject, Injectable} from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {PeopleDataResponseModel} from "../models/people.data.response.model";
 import {ProfileApiService} from '../services/profile.api.service';
 import {User} from '../../../../dashboard/domain/entities/user';
@@ -24,6 +24,9 @@ export class ProfileRepositoryImpl implements ProfileRepository {
         }
 
         return response.data
+      }),
+      catchError((err, _) => {
+        return throwError(() => err);
       })
     )
   }
