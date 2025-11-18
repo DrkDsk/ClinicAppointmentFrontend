@@ -16,6 +16,7 @@ import {AuthRepository} from '../domain/repositories/auth.repository';
 import {NgClass} from '@angular/common';
 import {RoleService} from '../../../../core/shared/data/services/role/role.service';
 import {AppPaths} from '../../../../core/constants/path.constants';
+import {SYSTEM_ROLES} from '../../../../core/constants/role.constants';
 
 @Component({
   selector: 'app-login.component',
@@ -80,10 +81,18 @@ export class LoginComponent {
 
         let token = data.token;
         this.errorMessage = null;
-        this.navigationFacade.navigate(AppPaths.dashboard)
         this.tokenService.setToken(token);
         const roles = profile.roles.map(role => role.name);
         this.roleService.setRoles(roles)
+
+        const adminRolesEnabled = roles.some(role => SYSTEM_ROLES.includes(role));
+
+        if (!adminRolesEnabled) {
+          this.navigationFacade.navigate(AppPaths.root)
+          return
+        }
+
+        this.navigationFacade.navigate(AppPaths.dashboard)
       },
       error: (data) => {
         let response = data.error;

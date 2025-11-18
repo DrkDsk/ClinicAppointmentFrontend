@@ -13,10 +13,10 @@ export const errorInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next:
 
   return next(req).pipe(
     catchError((err: unknown) => {
-      if (err instanceof HttpErrorResponse && err.status === 403) {
+      if (err instanceof HttpErrorResponse && (err.status === 403 || err.status === 401)) {
         authService.logout?.();
         tokenService.removeToken()
-        router.navigateByUrl(AppPaths.login, {replaceUrl: true}).then(r => {
+        router.navigateByUrl(AppPaths.login, {replaceUrl: true}).then(_ => {
         });
       }
 

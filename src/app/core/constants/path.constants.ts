@@ -1,4 +1,5 @@
 export const AppPaths = {
+  root: '/',
   users: 'users',
   doctors: 'doctors',
   login: 'login',

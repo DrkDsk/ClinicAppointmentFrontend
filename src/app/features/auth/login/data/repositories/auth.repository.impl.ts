@@ -1,7 +1,7 @@
 import {catchError, map, Observable, throwError} from "rxjs";
 import {LoginCredentials} from "../../domain/entities/credential";
 import {AuthRepository} from "../../domain/repositories/auth.repository";
-import {inject, Inject, Injectable} from "@angular/core";
+import {inject, Injectable} from "@angular/core";
 import {AuthApiService} from "../services/auth.api.service";
 import {LoginResponseModel} from '../models/login.response.model';
 import {AuthApiServiceImpl} from '../services/auth.api.service.impl';
