@@ -27,9 +27,15 @@ export const routes: Routes = [
         .then(m => m.LoginComponent)
   },
   {
-    path: AppPaths.createAppointment,
-    loadComponent: () =>
-      import('./features/appointments/presentation/create/create-appointment.component').then(m => m.CreateAppointmentComponent),
+    path: '',
+    component: DrawerComponent,
+    children: [
+      {
+        path: AppPaths.createAppointment,
+        loadComponent: () =>
+          import('./features/appointments/presentation/create/create-appointment.component').then(m => m.CreateAppointmentComponent),
+      },
+    ]
   },
   {
     path: '',

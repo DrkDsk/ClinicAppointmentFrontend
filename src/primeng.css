@@ -7,20 +7,22 @@
 
   .p-datepicker-panel-background {
     background: linear-gradient(145deg, #1f2230, #292b3a) !important;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   }
 
   .p-datepicker-header {
     background: linear-gradient(145deg, #1f2230, #292b3a) !important;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   }
 
   .p-datepicker-dropdown {
     color: #e6edf8 !important;
+    border: none !important;
   }
 
   .p-inputtext {
     color: #e6edf8 !important;
+    border: none !important;
   }
 }
 
@@ -32,6 +34,14 @@
 
   .p-datepicker-panel-background {
     background: linear-gradient(145deg, #f9f9f9, #f1f1f1) !important;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .p-datepicker-dropdown {
+    border: none !important;
+  }
+
+  .p-inputtext {
+    border: none !important;
   }
 }

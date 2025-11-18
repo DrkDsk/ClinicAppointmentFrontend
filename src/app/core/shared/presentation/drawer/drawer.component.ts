@@ -20,7 +20,7 @@ import {
 
 export class DrawerComponent {
 
-  @Input() visible: boolean = true;
+  @Input() visible: boolean = false;
   @Output() visibleChange = new EventEmitter<boolean>();
 
   close() {
