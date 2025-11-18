@@ -2,10 +2,10 @@
   <div class="px-4 text-color flex flex-row items-center space-x-2">
     <p>Mostrando {{ from }} hasta {{ to }} de {{ totalRecords }} registros</p>
 
-    <p-button type="button" icon="pi pi-angle-double-left text-white"
+    <p-button type="button" icon="pi pi-angle-double-left"
               (click)="handleGoFirstPage()" text/>
 
-    <p-button type="button" icon="pi pi-angle-left text-white"
+    <p-button type="button" icon="pi pi-angle-left"
               (click)="handePrevPage()"
               [disabled]="isFirstPage()" text/>
 
@@ -16,11 +16,11 @@
       </button>
     }
 
-    <p-button type="button" icon="pi pi-angle-right text-white"
+    <p-button type="button" icon="pi pi-angle-right"
               (click)="handleNextPage()"
               [disabled]="isLastPage()" text/>
 
-    <p-button type="button" icon="pi pi-angle-double-right text-white"
+    <p-button type="button" icon="pi pi-angle-double-right"
               (click)="handleLoadDoctors(lastPage)" text/>
   </div>
 </div>

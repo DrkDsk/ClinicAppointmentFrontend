@@ -91,4 +91,6 @@ export class LoginComponent {
       }
     });
   }
+
+  protected readonly AppPaths = AppPaths;
 }

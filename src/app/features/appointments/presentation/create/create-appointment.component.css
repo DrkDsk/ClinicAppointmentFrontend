@@ -1,3 +1,5 @@
-.text-color-label {
-  color: #e6edf8 !important;
+@media (prefers-color-scheme: dark) {
+  .text-color-label {
+    color: #e6edf8 !important;
+  }
 }
