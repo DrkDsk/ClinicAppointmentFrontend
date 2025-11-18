@@ -69,16 +69,20 @@ export class CreateAppointmentComponent implements OnInit {
     })
   });
 
+  patientForm = new FormGroup({
+    name: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required]
+    }),
+    lastName: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required]
+    }),
+  })
+
   appointmentForm: FormGroup = new FormGroup({
     doctorForm: this.doctorForm,
-    patientName: new FormControl('', {
-      nonNullable: true,
-      validators: [Validators.required]
-    }),
-    middleName: new FormControl('', {
-      nonNullable: true,
-      validators: [Validators.required]
-    }),
+    patientForm: this.patientForm,
     note: new FormControl('', {
       nonNullable: false,
     }),
@@ -134,9 +138,8 @@ export class CreateAppointmentComponent implements OnInit {
 
       if (profile) {
         this.patientProfile = response?.person;
-        this.appointmentForm.patchValue({
-          'patientName': profile.name
-        })
+        this.patientForm.get('name')?.patchValue(profile.name);
+        this.patientForm.get('lastName')?.patchValue(profile.last_name);
       } else {
         this.patientProfile = null;
       }
@@ -213,14 +216,22 @@ export class CreateAppointmentComponent implements OnInit {
 
   get patientName(): string {
 
-    const name = this.appointmentForm.get('patientName')?.value
-    const middleName = this.appointmentForm.get('middleName')?.value
+    const name = this.patientForm.get("name")?.value
+    const middleName = this.patientForm.get('lastName')?.value
 
     return `${name} ${middleName}`
   }
 
   get appointmentNote(): string {
     return this.appointmentForm.get('note')?.value ?? ""
+  }
+
+  get firstNameIsFilled(): boolean {
+    return !!this.patientProfile?.name;
+  }
+
+  get lastNameIsFilled(): boolean {
+    return !!this.patientProfile?.last_name;
   }
 
   onSubmit() {
@@ -232,9 +243,5 @@ export class CreateAppointmentComponent implements OnInit {
       date: `${formattedDate} ${this.selectedTime}`,
       note: this.appointmentNote
     }
-
-    console.log({
-      body
-    })
   }
 }
