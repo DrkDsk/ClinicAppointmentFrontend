@@ -12,19 +12,22 @@
         <ng-template pTemplate="content" let-activateCallback="activateCallback">
 
           <form [formGroup]="appointmentForm">
-            <div class="w-3/4 mx-auto">
+            <div class="w-11/12 mx-auto">
               <div class="grid grid-cols-3 gap-8">
 
                 @for (doctor of doctors; track doctor.id) {
                   <div
-                    [ngClass]="(selectedDoctor != null ? selectedDoctor.id.toString() == doctor.id.toString() : false) ? 'bg-surface-500 text-white dark:text-color' : 'bg-surface-0'"
-                    (click)="setDoctorId(doctor)"
-                    class="flex flex-col justify-between h-64 w-full p-4 rounded-sm focus:outline-none border border-surface-100">
-                    <div class="flex flex-row justify-between">
-                      <p class="text-2xl">{{ doctor.profile.name }}</p>
-                      <p class="text-2xl">{{ doctor.id }}</p>
+                    class="hover:bg-primary-500/20 hover:rounded-2xl p-4 transform transition motion-reduce:transition-none motion-reduce:hover:transform-none duration-600">
+                    <div
+                      [ngClass]="(selectedDoctor != null ? selectedDoctor.id.toString() == doctor.id.toString() : false) ? 'bg-surface-500 text-white dark:text-color' : 'bg-surface-0'"
+                      (click)="setDoctorId(doctor)"
+                      class="flex flex-col justify-between h-64 w-full p-4 rounded-sm focus:outline-none border border-surface-100">
+                      <div class="flex flex-row justify-between">
+                        <p class="text-2xl">{{ doctor.profile.name }}</p>
+                        <p class="text-2xl">{{ doctor.id }}</p>
+                      </div>
+                      <p class="text-end text-lg">{{ doctor.specialty }}</p>
                     </div>
-                    <p class="text-end text-lg">{{ doctor.specialty }}</p>
                   </div>
                 }
               </div>
@@ -116,7 +119,7 @@
       </p-step-panel>
 
       <p-step-panel [value]="3">
-        <ng-template pTemplate="content" let-activateCallback="activateCallback">
+        <ng-template pTemplate="content">
           <div class="flex justify-center w-1/2 my-5 mx-auto">
 
             <div
@@ -159,7 +162,8 @@
                 <div>
                   <span>Nota</span>
 
-                  <textarea class="w-full bg-surface-50 p-4" [disabled]="true" [value]="appointmentNote">
+                  <textarea class="w-full bg-surface-50 dark:bg-surface-100/80 p-4" [disabled]="true"
+                            [value]="appointmentNote">
                   </textarea>
                 </div>
               </div>
