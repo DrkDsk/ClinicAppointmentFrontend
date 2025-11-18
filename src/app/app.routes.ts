@@ -20,6 +20,18 @@ export const routes: Routes = [
     ]
   },
   {
+    path: AppPaths.login,
+    canActivate: [noAuthGuard],
+    loadComponent: () =>
+      import('./features/auth/login/presentation/login.component')
+        .then(m => m.LoginComponent)
+  },
+  {
+    path: AppPaths.createAppointment,
+    loadComponent: () =>
+      import('./features/appointments/presentation/create/create-appointment.component').then(m => m.CreateAppointmentComponent),
+  },
+  {
     path: '',
     component: DrawerComponent,
     canActivate: [authGuard],
@@ -54,12 +66,6 @@ export const routes: Routes = [
           import('./features/appointments/presentation/index/appointments.component').then(m => m.AppointmentsComponent),
       },
       {
-        path: AppPaths.createAppointment,
-        loadComponent: () =>
-          import('./features/appointments/presentation/create/create-appointment.component').then(m => m.CreateAppointmentComponent),
-      }
-      ,
-      {
         path: AppPaths.createDoctor,
         loadComponent: () =>
           import('./features/users/doctor/presentation/create/create-doctor.component')
@@ -68,11 +74,4 @@ export const routes: Routes = [
       }
     ]
   },
-  {
-    path: AppPaths.login,
-    canActivate: [noAuthGuard],
-    loadComponent: () =>
-      import('./features/auth/login/presentation/login.component')
-        .then(m => m.LoginComponent)
-  }
 ];
